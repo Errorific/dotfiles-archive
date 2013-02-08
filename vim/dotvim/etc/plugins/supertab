@@ -1,0 +1,3 @@
+Bundle 'ervandew/supertab'
+
+let g:SuperTabDefaultCompletionType = "context"

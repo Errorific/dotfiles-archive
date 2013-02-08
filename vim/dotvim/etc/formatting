@@ -1,0 +1,8 @@
+set nowrap
+set autoindent
+set shiftwidth=2
+set expandtab
+set tabstop=2
+set softtabstop=2
+set pastetoggle=<F12>
+autocmd FileType c,cpp,java,php,javascript,python,twig,xml,yml autocmd BufWritePre <buffer> call StripTrailingWhitespace()

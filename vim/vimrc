@@ -1,0 +1,25 @@
+set nocompatible               " be iMproved
+filetype off                   " required!
+
+source ~/.vim/etc/plugins/vundle
+source ~/.vim/etc/plugins/nerdtree
+source ~/.vim/etc/plugins/ultisnips
+source ~/.vim/etc/plugins/vim-perl
+source ~/.vim/etc/plugins/perlomni
+source ~/.vim/etc/plugins/syntastic
+source ~/.vim/etc/plugins/ack
+source ~/.vim/etc/plugins/vim-easytags
+source ~/.vim/etc/plugins/vim-colors
+source ~/.vim/etc/plugins/vim-colors-solarized
+source ~/.vim/etc/plugins/supertab
+
+"source ~/.vim/etc/tab_complete
+source ~/.vim/etc/formatting
+source ~/.vim/etc/ui
+source ~/.vim/etc/keys
+
+filetype on
+filetype plugin on
+filetype indent on
+
+
