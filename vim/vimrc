@@ -6,6 +6,7 @@ source ~/.vim/etc/plugins/nerdtree
 source ~/.vim/etc/plugins/nerdcommenter
 source ~/.vim/etc/plugins/ultisnips
 source ~/.vim/etc/plugins/vim-perl
+source ~/.vim/etc/plugins/vim-scala
 source ~/.vim/etc/plugins/perlomni
 source ~/.vim/etc/plugins/syntastic
 source ~/.vim/etc/plugins/ack
