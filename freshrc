@@ -1,0 +1,16 @@
+# freshshell.com
+#
+# Examples:
+#
+#   fresh twe4ked/dotfiles shell/functions.sh
+#   fresh jasoncodes/dotfiles aliases/rails.sh
+#   fresh jasoncodes/dotfiles config/tmux.conf --file
+#
+# See http://freshshell.com/readme for documentation.
+
+fresh freshshell/fresh bin/fresh --bin
+fresh Errorific/dotfiles vim/vimrc --file
+fresh Errorific/dotfiles vim/dotvim/etc --file=~/.vim/etc/
+fresh gmarik/vundle autoload --file=~/.vim/bundle/vundle/autoload/
+fresh gmarik/vundle doc --file=~/.vim/bundle/vundle/doc/
+fresh gmarik/vundle test --file=~/.vim/bundle/vundle/test/
