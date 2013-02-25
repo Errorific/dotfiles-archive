@@ -383,7 +383,8 @@ globalkeys = awful.util.table.join(
     -- }}}
 
     -- {{{ Multimedia keys
-    awful.key({}, "#160", function () exec("kscreenlocker --forcelock") end),
+    --awful.key({}, "#160", function () exec("kscreenlocker --forcelock") end),
+    awful.key({modkey}, "x", function () exec("xlock") end),
   --awful.key({}, "#121", function () exec("pvol.py -m") end),
     awful.key({}, "#122", function () exec("pvol.py -p -c -2") end),
     awful.key({}, "#123", function () exec("pvol.py -p -c  2") end),
