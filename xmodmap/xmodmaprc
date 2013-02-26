@@ -1,0 +1,8 @@
+remove Control = Control_R
+remove Mod1 = Alt_R
+remove Lock = Caps_Lock
+
+keysym Caps_Lock = Control_L
+
+add Control = Alt_R Control_L
+add Mod1 = Control_R
