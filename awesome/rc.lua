@@ -46,7 +46,7 @@ layouts = {
 
 -- {{{ Tags
 tags = {
-  names  = { "term", "emacs", "web", "mail", "im", 6, 7, "rss", "media" },
+  names  = { "term", "im", "web", "mail", "emacs", 6, 7, "rss", "media" },
   layout = { layouts[2], layouts[1], layouts[1], layouts[4], layouts[1],
              layouts[6], layouts[6], layouts[5], layouts[6]
 }}
@@ -54,7 +54,7 @@ tags = {
 for s = 1, scount do
   tags[s] = awful.tag(tags.names, s, tags.layout)
   for i, t in ipairs(tags[s]) do
-      awful.tag.setproperty(t, "mwfact", i==5 and 0.13  or  0.5)
+      awful.tag.setproperty(t, "mwfact", i==2 and 0.13  or  0.5)
       awful.tag.setproperty(t, "hide",  (i==6 or  i==7) and true)
   end
 end
@@ -83,7 +83,7 @@ cpugraph:set_gradient_angle(0):set_gradient_colors({
    beautiful.fg_end_widget, beautiful.fg_center_widget, beautiful.fg_widget
 }) -- Register widgets
 vicious.register(cpugraph,  vicious.widgets.cpu,      "$1")
-vicious.register(tzswidget, vicious.widgets.thermal, " $1C", 19, "thermal_zone0")
+vicious.register(tzswidget, vicious.widgets.thermal, " $1C", 20, {"coretemp.0", "core"})
 -- }}}
 
 -- {{{ Battery state
