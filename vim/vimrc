@@ -12,7 +12,7 @@ source ~/.vim/etc/plugins/syntastic
 source ~/.vim/etc/plugins/ack
 source ~/.vim/etc/plugins/vim-easytags
 source ~/.vim/etc/plugins/vim-colors
-source ~/.vim/etc/plugins/vim-colors-solarized
+source ~/.vim/etc/plugins/vim-zenburn
 source ~/.vim/etc/plugins/supertab
 source ~/.vim/etc/plugins/vimux
 
