@@ -1,0 +1,58 @@
+Host admin
+  HostName admin.iseek.com.au
+  User cmckay
+  IdentityFile ~/.ssh/id_error
+
+Host admin.iseek.com.au
+  HostName admin.iseek.com.au
+  User cmckay
+  IdentityFile ~/.ssh/id_error
+
+Host cmckay.devvm.iseek.com.au
+  HostName cmckay.devvm.iseek.com.au
+  User cmckay
+  IdentityFile ~/.ssh/id_error
+
+Host dev.iseek.com.au
+  HostName dev.iseek.com.au
+  User cmckay
+
+Host cmckay.devvm
+  HostName cmckay.devvm.iseek.com.au
+  User cmckay
+  IdentityFile ~/.ssh/id_error
+
+Host devsunserver1
+  HostName lr-devsunserver1.desktopservices.iseek.com.au
+  User cmckay
+  IdentityFile ~/.ssh/id_error
+
+Host lr-devsunserver1
+  HostName lr-devsunserver1.desktopservices.iseek.com.au
+  User cmckay
+  IdentityFile ~/.ssh/id_error
+
+Host lr-devsunserver1.desktopservices.iseek.com.au
+  HostName lr-devsunserver1.desktopservices.iseek.com.au
+  User cmckay
+  IdentityFile ~/.ssh/id_error
+
+Host admin1.vma
+  HostName admin1.virginbroadband.com.au
+  User cmckay
+
+Host pigi.uat.wigi 
+  HostName pigi.uat.wigi.appnet.iseek.com.au
+  User cmckay
+
+Host gitmo.build.iseek.com.au
+  User gitolite3
+  IdentityFile ~/.ssh/cmckay_iseek
+  HostName localhost
+  Port 13222
+#  ProxyCommand connect-proxy -S localhost:13202 %h %p
+#
+Host github.com
+  Hostname github.com
+  User git
+  IdentityFile ~/.ssh/id_error
