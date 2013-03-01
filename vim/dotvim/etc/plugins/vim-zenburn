@@ -1,6 +1,6 @@
 Bundle 'jnurmine/Zenburn'
 
+set t_Co=256
 colors zenburn
 
-let gzenburn_transparent = 1
-"let gzenburn_high_Contrast = 1
+
