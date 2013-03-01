@@ -18,11 +18,5 @@ set listchars=tab:,.,trail:.,extends:#,nbsp:. " Highlight problematic whitespace
 
 set background=dark
 set t_Co=256
-"let g:solarized_termcolors=256
-"color solarized
-colors zenburn
 
-"let g:solarized_termtrans=1
-"let g:solarized_contrast="high"
-"let g:solarized_visibility="high"
 
