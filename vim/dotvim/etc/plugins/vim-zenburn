@@ -3,4 +3,4 @@ Bundle 'jnurmine/Zenburn'
 colors zenburn
 
 let gzenburn_transparent = 1
-let gzenburn_high_Contrast = 1
+"let gzenburn_high_Contrast = 1
