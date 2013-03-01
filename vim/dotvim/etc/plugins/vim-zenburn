@@ -1,6 +1,6 @@
 Bundle 'jnurmine/Zenburn'
 
-set t_Co=256
-colors zenburn
+"set t_Co=256
+"colors zenburn
 
 

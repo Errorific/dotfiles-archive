@@ -19,4 +19,5 @@ set listchars=tab:,.,trail:.,extends:#,nbsp:. " Highlight problematic whitespace
 set background=dark
 set t_Co=256
 
+colors zenburn
 
