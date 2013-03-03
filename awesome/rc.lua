@@ -14,7 +14,6 @@
 require("awful")
 require("awful.rules")
 require("awful.autofocus")
-require("sharetags")
 -- User libraries
 vicious = require("vicious")
 scratch = require("scratch")
@@ -52,11 +51,12 @@ tags = {
              layouts[6], layouts[6], layouts[5], layouts[6]
 }}
 
-tags = sharetags.create_tags(tags.names, tags.layout)
-
-for i, t in ipairs(tags) do
-    awful.tag.setproperty(t, "mwfact", i==2 and 0.13  or  0.5)
-    awful.tag.setproperty(t, "hide",  (i==6 or  i==7) and true)
+for s = 1, scount do
+  tags[s] = awful.tag(tags.names, s, tags.layout)
+  for i, t in ipairs(tags[s]) do
+      awful.tag.setproperty(t, "mwfact", i==2 and 0.13  or  0.5)
+      awful.tag.setproperty(t, "hide",  (i==6 or  i==7) and true)
+  end
 end
 -- }}}
 
@@ -318,8 +318,7 @@ for s = 1, scount do
                                                 return awful.widget.tasklist.label.currenttags(c,s)
                                           end, mytasklist.buttons)
     -- Create the taglist
-    --taglist[s] = awful.widget.taglist(s, awful.widget.taglist.label.all, taglist.buttons)
-    taglist[s] = sharetags.taglist(s, awful.widget.taglist.label.all, mytaglist.buttons)
+    taglist[s] = awful.widget.taglist(s, awful.widget.taglist.label.all, taglist.buttons)
     -- Create the wibox
     wibox[s] = awful.wibox({      screen = s,
         fg = beautiful.fg_normal, height = 12,
