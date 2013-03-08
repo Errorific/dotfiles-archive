@@ -21,6 +21,7 @@ source ~/.vim/etc/plugins/vimux
 source ~/.vim/etc/formatting
 source ~/.vim/etc/ui
 source ~/.vim/etc/keys
+source ~/.vim/etc/dirs
 
 filetype on
 filetype plugin on
