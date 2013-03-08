@@ -1,5 +1,5 @@
 let parent = $HOME
-let prefix = 'vimstate'
+let prefix = 'vim'
 let dir_list = {
             \ 'backup': 'backupdir',
             \ 'views': 'viewdir',
