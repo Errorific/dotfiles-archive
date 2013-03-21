@@ -186,26 +186,26 @@ mailwidget:buttons(awful.util.table.join(
 --]]
 
 -- {{{ Org-mode agenda
-orgicon = widget({ type = "imagebox" })
-orgicon.image = image(beautiful.widget_org)
--- Initialize widget
-orgwidget = widget({ type = "textbox" })
--- Configure widget
-local orgmode = {
-  files = { home.."/.org/computers.org",
-    home.."/.org/index.org", home.."/.org/personal.org",
-  },
-  color = {
-    past   = '<span color="'..beautiful.fg_urgent..'">',
-    today  = '<span color="'..beautiful.fg_normal..'">',
-    soon   = '<span color="'..beautiful.fg_widget..'">',
-    future = '<span color="'..beautiful.fg_netup_widget..'">'
-}} -- Register widget
-vicious.register(orgwidget, vicious.widgets.org,
-  orgmode.color.past..'$1</span>-'..orgmode.color.today .. '$2</span>-' ..
-  orgmode.color.soon..'$3</span>-'..orgmode.color.future.. '$4</span>', 601,
-  orgmode.files
-) -- Register buttons
+--orgicon = widget({ type = "imagebox" })
+--orgicon.image = image(beautiful.widget_org)
+---- Initialize widget
+--orgwidget = widget({ type = "textbox" })
+---- Configure widget
+--local orgmode = {
+  --files = { home.."/.org/computers.org",
+    --home.."/.org/index.org", home.."/.org/personal.org",
+  --},
+  --color = {
+    --past   = '<span color="'..beautiful.fg_urgent..'">',
+    --today  = '<span color="'..beautiful.fg_normal..'">',
+    --soon   = '<span color="'..beautiful.fg_widget..'">',
+    --future = '<span color="'..beautiful.fg_netup_widget..'">'
+--}} -- Register widget
+--vicious.register(orgwidget, vicious.widgets.org,
+  --orgmode.color.past..'$1</span>-'..orgmode.color.today .. '$2</span>-' ..
+  --orgmode.color.soon..'$3</span>-'..orgmode.color.future.. '$4</span>', 601,
+  --orgmode.files
+--) -- Register buttons
 -- orgwidget:buttons(awful.util.table.join(
   -- awful.button({ }, 1, function () exec("emacsclient --eval '(org-agenda-list)'") end),
   -- awful.button({ }, 3, function () exec("emacsclient --eval '(make-remember-frame)'") end)
