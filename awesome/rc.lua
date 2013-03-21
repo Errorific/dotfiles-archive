@@ -9,11 +9,11 @@
 -- Alike License: http://creativecommons.org/licenses/by-sa/3.0/
 -- }}}
 
-
 -- {{{ Libraries
 require("awful")
 require("awful.rules")
 require("awful.autofocus")
+require("sharetags")
 -- User libraries
 vicious = require("vicious")
 scratch = require("scratch")
@@ -60,6 +60,7 @@ for s = 1, scount do
 end
 -- }}}
 
+tags = sharetags.create_tags(tags.names, tags.layout)
 
 -- {{{ Wibox
 --
@@ -318,7 +319,8 @@ for s = 1, scount do
                                                 return awful.widget.tasklist.label.currenttags(c,s)
                                           end, mytasklist.buttons)
     -- Create the taglist
-    taglist[s] = awful.widget.taglist(s, awful.widget.taglist.label.all, taglist.buttons)
+    --taglist[s] = awful.widget.taglist(s, awful.widget.taglist.label.all, taglist.buttons)
+    taglist[s] = sharetags.taglist(s, awful.widget.taglist.label.all, taglist.buttons)
     -- Create the wibox
     wibox[s] = awful.wibox({      screen = s,
         fg = beautiful.fg_normal, height = 12,
