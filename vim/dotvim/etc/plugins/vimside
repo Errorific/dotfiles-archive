@@ -1,0 +1,5 @@
+Bundle "megaannum/self"
+Bundle "megaannum/forms" 
+Bundle "Shougo/vimproc"
+Bundle "Shougo/vimshell"
+Bundle "megaannum/vimside"
