@@ -28,8 +28,19 @@
 (el-get 'sync my-packages)
 ;;}}}
 
+;;{{{ Backup location changing
 (make-directory "~/.emacs.d/autosaves/" t)
 (make-directory "~/.emacs.d/backups/" t)
 (setq backup-directory-alist `(("." . ,(concat user-emacs-directory "backups"))))
 (setq auto-save-file-name-transforms `((".*" ,(concat user-emacs-directory "autosaves") t)))
 (setq backup-by-copying t)
+(setq create-lockfiles nil)
+;;}}}
+
+(fset 'yes-or-no-p 'y-or-n-p)            ;; enable y/n answers to yes/no
+
+(setq tab-width 2)
+(defvaralias 'c-basic-offset 'tab-width)
+(defvaralias 'cperl-indent-level 'tab-width)
+
+(load-theme 'zenburn t)
