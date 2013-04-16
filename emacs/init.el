@@ -15,13 +15,24 @@
       (goto-char (point-max))
       (eval-print-last-sexp))))
 
+(add-to-list 'el-get-recipe-path' "~/.emacs.d/custom-recipes")
+
 ;; local sources
 (setq el-get-sources
   '((:name ensime :load-path("./dist_2.10.0/elisp"))))
 
 (setq my-packages
      (append
-      '(el-get cperl-mode scala-mode zenburn-theme coffee-mode)
+      '(
+        el-get
+        cperl-mode
+        scala-mode
+        zenburn-theme
+        coffee-mode
+        less-css-mode
+        init-ido
+        ctags
+        whitespace)
       (mapcar 'el-get-source-name el-get-sources)))
 
 (el-get-cleanup my-packages)
@@ -39,8 +50,19 @@
 
 (fset 'yes-or-no-p 'y-or-n-p)            ;; enable y/n answers to yes/no
 
+(setq-default indent-tabs-mode nil)
 (setq tab-width 2)
 (defvaralias 'c-basic-offset 'tab-width)
 (defvaralias 'cperl-indent-level 'tab-width)
+(custom-set-variables '(coffee-tab-width 2))
 
 (load-theme 'zenburn t)
+
+;;{{{ whitespace & 80 chars
+(require 'whitespace)
+;; set the types of bad whitespace
+(setq whitespace-style '(face empty tabs lines-tail trailing))
+;; automatically clean up bad whitespace
+(setq whitespace-action '(auto-cleanup))
+(global-whitespace-mode t)
+;;}}}
