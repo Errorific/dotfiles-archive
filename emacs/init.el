@@ -50,6 +50,8 @@
 
 (fset 'yes-or-no-p 'y-or-n-p)            ;; enable y/n answers to yes/no
 
+(defalias 'perl-mode 'cperl-mode)
+
 (setq-default indent-tabs-mode nil)
 (setq tab-width 2)
 (defvaralias 'c-basic-offset 'tab-width)
