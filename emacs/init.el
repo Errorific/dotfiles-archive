@@ -26,8 +26,7 @@
       '(
         el-get
         cperl-mode
-        scala-mode
-        zenburn-theme
+        tomorrow-theme
         coffee-mode
         less-css-mode
         init-ido
@@ -52,13 +51,21 @@
 
 (defalias 'perl-mode 'cperl-mode)
 
-(setq-default indent-tabs-mode nil)
+(setq indent-tabs-mode nil)
 (setq tab-width 2)
-(defvaralias 'c-basic-offset 'tab-width)
-(defvaralias 'cperl-indent-level 'tab-width)
-(custom-set-variables '(coffee-tab-width 2))
+(setq cperl-indent-level 2 ; 4 character indents
+      cperl-indent-parens-as-block t ; indent parens like blocks
+      cperl-indent-subs-specially nil
+      cperl-continued-statement-offset 2
+      cperl-continued-brace-offset 0
+      cperl-close-paren-offset -2
+      cperl-tabs-always-indent nil
+      cperl-sub-keywords '("sub" "method" "func"))
 
-(load-theme 'zenburn t)
+;(load-theme 'zenburn t)
+;(load-theme 'solarized-dark t)
+(color-theme-tomorrow-night)
+
 
 ;;{{{ whitespace & 80 chars
 (require 'whitespace)
@@ -68,3 +75,8 @@
 (setq whitespace-action '(auto-cleanup))
 (global-whitespace-mode t)
 ;;}}}
+
+(custom-set-variables 
+  '(coffee-tab-width 2)
+  '(column-number-mode t)
+  '(fill-column 80))

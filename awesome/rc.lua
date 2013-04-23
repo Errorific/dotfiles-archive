@@ -324,7 +324,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "t", function () awful.util.spawn(terminal) end),
 
     -- Bildschirm sperren
-    awful.key({ modkey,           }, "w", function () awful.util.spawn("xscreensaver-command -lock") end),
+    --awful.key({ modkey,           }, "w", function () awful.util.spawn("xscreensaver-command -lock") end),
+    awful.key({ modkey,           }, "w", function () awful.util.spawn("xlock") end),
 
     -- Präsentationsmodus umschalten mit Fn-F7
     awful.key({ }, "XF86Display", function () awful.util.spawn("~/bin/toggle-display --toggle") end),
