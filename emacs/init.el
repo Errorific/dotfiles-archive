@@ -64,6 +64,7 @@
 
 ;(load-theme 'zenburn t)
 ;(load-theme 'solarized-dark t)
+(require 'color-theme-tomorrow)
 (color-theme-tomorrow-night)
 
 
