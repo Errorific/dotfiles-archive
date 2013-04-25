@@ -1,4 +1,3 @@
-
 URxvt.transparent: true
 URxvt.scrollBar: false
 URxvt.savelines: 12000
@@ -6,10 +5,88 @@ URxvt.urlLauncher: firefox
 URxvt.perl-ext-common: default
 URxvt.cursorBlink: true
 URxvt.fading: 25%
-URxvt.background: black
-URxvt.foreground: grey80
-URxvt.tintColor: #262626
-URxvt.borderColor: #888888
+!URxvt.background: black
+!URxvt.foreground: grey80
+!URxvt.tintColor: #262626
+!URxvt.borderColor: #888888
 URxvt.internalBorder: 0
 URxvt.externalBorder: 0
 URxvt*font:       xft:Anonymous Pro:pixelsize=13:antialiasing=true 
+
+!TomorrowNight
+#define t_background #1d1f21
+#define t_current_line #282a2e
+#define t_selection #373b41
+#define t_foreground #c5c8c6
+#define t_comment #969896
+#define t_red #cc6666
+#define t_orange #de935f
+#define t_yellow #f0c674
+#define t_green #b5bd68
+#define t_aqua #8abeb7
+#define t_blue #81a2be
+#define t_purple #b294bb
+
+
+*background: t_background
+*foreground: t_foreground
+! black
+*color0: t_current_line
+*color8: t_selection
+! red
+*color1: #A54242
+*color9: t_red
+! green
+*color2: #8C9440
+*color10: t_green
+! yellow
+*color3: t_orange
+*color11: t_yellow
+! blue
+*color4: #5F819D
+*color12: t_blue
+! magenta
+*color5: #85678F
+*color13: t_purple
+! cyan
+*color6: #5E8D87
+*color14: t_aqua
+! white
+*color7: t_comment
+*color15: t_foreground
+
+!*.foreground: t_foreground
+!*.background: t_background
+!*.cursorColor: #aeafad
+
+!! Black / Grey
+!*.color0: #000000
+!*.color8: #666666
+
+!! Red / Bright Red
+!*.color1: t_red
+!*.color9: #FF3334
+
+!! Green + Bright Green
+!*.color2: t_green
+!*.color10: #9ec400
+
+!! Yellow (Orange) + Bright Yellow (Yellow)
+!*.color3: t_orange
+!*.color11: t_yellow
+
+!! Blue + Bright Blue
+!*.color4: t_blue
+!*.color12: t_blue
+
+!! Magenta (Purple) + Bright Magenta
+!*.color5: t_purple
+!*.color13: #b777e0
+
+!! Cyan (Aqua) + Bright Cyan
+!*.color6: t_aqua
+!*.color14: #54ced6
+
+!! Light Grey (Selection) + White (Current Line)
+!*.color7: t_selection
+!*.color15: t_current_line
