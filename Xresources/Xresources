@@ -7,11 +7,12 @@ URxvt.cursorBlink: true
 URxvt.fading: 25%
 !URxvt.background: black
 !URxvt.foreground: grey80
-!URxvt.tintColor: #262626
+URxvt.tintColor: #262626
 !URxvt.borderColor: #888888
 URxvt.internalBorder: 0
 URxvt.externalBorder: 0
 URxvt*font:       xft:Anonymous Pro:pixelsize=13:antialiasing=true 
+URxvt.iso14755 : false
 
 !TomorrowNight
 #define t_background #1d1f21

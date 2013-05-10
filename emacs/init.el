@@ -31,12 +31,15 @@
         less-css-mode
         init-ido
         ctags
-        whitespace)
+        whitespace
+        smartparens)
       (mapcar 'el-get-source-name el-get-sources)))
 
 (el-get-cleanup my-packages)
 (el-get 'sync my-packages)
 ;;}}}
+
+(load (concat user-emacs-directory "init-smartparens"))
 
 ;;{{{ Backup location changing
 (make-directory "~/.emacs.d/autosaves/" t)
@@ -51,7 +54,7 @@
 
 (defalias 'perl-mode 'cperl-mode)
 
-(setq indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
 (setq tab-width 2)
 (setq cperl-indent-level 2 ; 4 character indents
       cperl-indent-parens-as-block t ; indent parens like blocks
@@ -60,13 +63,23 @@
       cperl-continued-brace-offset 0
       cperl-close-paren-offset -2
       cperl-tabs-always-indent nil
-      cperl-sub-keywords '("sub" "method" "func"))
+      cperl-sub-keywords '("sub" "method" "func")
+      coffee-tab-width 2
+      column-number-mode t
+      fill-column 80
+)
 
 ;(load-theme 'zenburn t)
 ;(load-theme 'solarized-dark t)
 (require 'color-theme-tomorrow)
 (color-theme-tomorrow-night)
 
+(set-face-attribute
+  'sp-pair-overlay-face nil
+  :inherit nil
+)
+
+(set-face-attribute 'sp-show-pair-match-face nil :background "SteelBlue4")
 
 ;;{{{ whitespace & 80 chars
 (require 'whitespace)
@@ -77,7 +90,17 @@
 (global-whitespace-mode t)
 ;;}}}
 
-(custom-set-variables 
-  '(coffee-tab-width 2)
-  '(column-number-mode t)
-  '(fill-column 80))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ ;;'(sp-pair-overlay-face ((t nil)))
+ ;;'(sp-show-pair-match-face ((t (:background "SteelBlue4")))))
+)
