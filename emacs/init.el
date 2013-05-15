@@ -74,6 +74,10 @@
 (require 'color-theme-tomorrow)
 (color-theme-tomorrow-night)
 
+;(if window-system 
+  (add-to-list 'default-frame-alist '(font . "Anonymous Pro-9"))
+;)
+
 (set-face-attribute
   'sp-pair-overlay-face nil
   :inherit nil
