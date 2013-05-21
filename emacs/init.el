@@ -32,6 +32,8 @@
         init-ido
         ctags
         whitespace
+        haskell-mode
+        clojure-mode
         smartparens)
       (mapcar 'el-get-source-name el-get-sources)))
 
@@ -49,6 +51,8 @@
 (setq backup-by-copying t)
 (setq create-lockfiles nil)
 ;;}}}
+;;
+(defalias 'perl-mode 'cperl-mode)
 
 (fset 'yes-or-no-p 'y-or-n-p)            ;; enable y/n answers to yes/no
 
