@@ -72,7 +72,8 @@
       column-number-mode t
       fill-column 80
 )
-
+(scroll-bar-mode -1)
+(global-linum-mode 1)
 ;(load-theme 'zenburn t)
 ;(load-theme 'solarized-dark t)
 (require 'color-theme-tomorrow)
