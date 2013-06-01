@@ -133,7 +133,7 @@ baticon.image = image(beautiful.widget_bat)
 -- Initialize widget
 batwidget = widget({ type = "textbox" })
 -- Register widget
-vicious.register(batwidget, vicious.widgets.bat, "$1$2%", 61, "BAT1")
+vicious.register(batwidget, vicious.widgets.bat, "$1$2%", 61, "BAT0")
 -- }}}
 
 -- Create a wibox for each screen and add it
@@ -418,9 +418,9 @@ awful.rules.rules = {
                      keys = clientkeys,
                      buttons = clientbuttons,
                    } },
-    { rule_any = { class = {"MPlayer", "pinentry", "Gimp", "recordMyDesktop",
-                        "Skype", "Vlc"} },
-      properties = { floating = true } },
+--    { rule_any = { class = {"MPlayer", "pinentry", "Gimp", "recordMyDesktop",
+  --                      "Skype", "Vlc"} },
+   --   properties = { floating = true } },
     -- VirtualBox immer auf dem 4. tag platzieren
     { rule = { class = "VirtualBox" },
       properties = { tag = tags[4]} },
