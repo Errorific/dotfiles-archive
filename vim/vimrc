@@ -11,7 +11,7 @@ source ~/.vim/etc/plugins/perlomni
 source ~/.vim/etc/plugins/play2vim
 source ~/.vim/etc/plugins/syntastic
 source ~/.vim/etc/plugins/ack
-source ~/.vim/etc/plugins/vim-easytags
+"source ~/.vim/etc/plugins/vim-easytags
 source ~/.vim/etc/plugins/vim-coffeescript
 source ~/.vim/etc/plugins/vim-colors
 source ~/.vim/etc/plugins/vim-zenburn
