@@ -32,8 +32,9 @@
         init-ido
         ctags
         whitespace
-        haskell-mode
+;;        haskell-mode
         clojure-mode
+        scala-mode2
         smartparens)
       (mapcar 'el-get-source-name el-get-sources)))
 
