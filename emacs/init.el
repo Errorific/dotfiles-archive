@@ -36,7 +36,11 @@
         clojure-mode
         scala-mode2
         lua-mode
-        smartparens)
+        smartparens
+        projectile
+        helm
+        zencoding-mode
+        )
       (mapcar 'el-get-source-name el-get-sources)))
 
 (el-get-cleanup my-packages)
@@ -80,6 +84,13 @@
 ;(load-theme 'solarized-dark t)
 (require 'color-theme-tomorrow)
 (color-theme-tomorrow-night)
+
+(projectile-global-mode)
+(global-set-key (kbd "C-c h") 'helm-projectile)
+;(global-set-key (kbd "C-c h") 'helm-mini)
+(helm-mode 1)
+;(setq helm-idle-delay 0.1)
+;(setq helm-input-idle-delay 0.1)
 
 ;(if window-system 
   (add-to-list 'default-frame-alist '(font . "Anonymous Pro-9"))
