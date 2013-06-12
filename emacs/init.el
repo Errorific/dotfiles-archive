@@ -35,6 +35,7 @@
 ;;        haskell-mode
         clojure-mode
         scala-mode2
+        lua-mode
         smartparens)
       (mapcar 'el-get-source-name el-get-sources)))
 

@@ -14,6 +14,7 @@ fresh Errorific/dotfiles vim/dotvim/etc --file=~/.vim/etc/
 fresh Errorific/dotfiles freshrc --file
 fresh Errorific/dotfiles xmodmap/xmodmaprc --file
 fresh Errorific/dotfiles Xresources/Xresources --file
+fresh Errorific/dotfiles tmux/tmux.config --file
 fresh gmarik/vundle autoload --file=~/.vim/bundle/vundle/autoload/
 fresh gmarik/vundle doc --file=~/.vim/bundle/vundle/doc/
 fresh gmarik/vundle test --file=~/.vim/bundle/vundle/test/
