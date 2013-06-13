@@ -93,8 +93,8 @@ local layouts = {
 -- {{{ Tags
 
 tags = {
-   names = { "main", "2", "3" },
-   layout = { layouts[2], layouts[4], layouts[1] }
+   names = { "main", "2", "3", "4", "5" },
+   layout = { layouts[2], layouts[4], layouts[2], layouts[2], layouts[2] }
 }
 
 for s = 1, screen.count() do
@@ -104,6 +104,13 @@ end
 -- }}}
 
 -- {{{ widgets
+-- Create a textclock widget
+mytextclock = awful.widget.textclock()
+
+-- {{{ Reusable separator
+separator = wibox.widget.imagebox()
+separator:set_image(conf_dir .. "/icons/separator.png")
+-- }}}
 
 -- }}}
 
@@ -184,6 +191,7 @@ for s = 1, screen.count() do
    -- Widgets that are aligned to the right
    local right_layout = wibox.layout.fixed.horizontal()
    if s == 1 then right_layout:add(wibox.widget.systray()) end
+   right_layout:add(mytextclock)
    right_layout:add(mylayoutbox[s])
 
    -- Now bring it all together (with the tasklist in the middle)
