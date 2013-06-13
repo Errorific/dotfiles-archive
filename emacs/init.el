@@ -1,8 +1,10 @@
 (when window-system
   (setq frame-title-format '(buffer-file-name "%f" ("%b")))
-  (tooltip-mode -1)
+;;  (tooltip-mode -1)
+  (tool-bar-mode -1)
   (mouse-wheel-mode t)
-  (blink-cursor-mode -1))
+;;  (blink-cursor-mode -1)
+)
 
 ;;{{{ el-get
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
@@ -62,8 +64,6 @@
 
 (fset 'yes-or-no-p 'y-or-n-p)            ;; enable y/n answers to yes/no
 
-(defalias 'perl-mode 'cperl-mode)
-
 (setq-default indent-tabs-mode nil)
 (setq tab-width 2)
 (setq cperl-indent-level 2 ; 4 character indents
@@ -92,7 +92,7 @@
 ;(setq helm-idle-delay 0.1)
 ;(setq helm-input-idle-delay 0.1)
 
-;(if window-system 
+;(if window-system
   (add-to-list 'default-frame-alist '(font . "Anonymous Pro-9"))
 ;)
 
