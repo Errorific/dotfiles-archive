@@ -34,7 +34,7 @@
         init-ido
         ctags
         whitespace
-;;        haskell-mode
+        haskell-mode
         clojure-mode
         scala-mode2
         lua-mode
