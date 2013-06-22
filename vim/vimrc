@@ -16,7 +16,7 @@ source ~/.vim/etc/plugins/vim-coffeescript
 source ~/.vim/etc/plugins/vim-colors
 source ~/.vim/etc/plugins/vim-zenburn
 source ~/.vim/etc/plugins/vim-fugitive
-source ~/.vim/etc/plugins/vimside
+"source ~/.vim/etc/plugins/vimside
 source ~/.vim/etc/plugins/supertab
 source ~/.vim/etc/plugins/vimux
 
