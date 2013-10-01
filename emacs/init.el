@@ -27,6 +27,7 @@
      (append
       '(
         el-get
+        evil
         cperl-mode
         tomorrow-theme
         coffee-mode
@@ -48,6 +49,8 @@
 (el-get-cleanup my-packages)
 (el-get 'sync my-packages)
 ;;}}}
+
+(evil-mode 1)
 
 (load (concat user-emacs-directory "init-smartparens"))
 
