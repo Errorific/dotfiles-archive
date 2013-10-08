@@ -38,6 +38,7 @@
         haskell-mode
         clojure-mode
         scala-mode2
+        sml-mode
         lua-mode
         smartparens
         projectile
