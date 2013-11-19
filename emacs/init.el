@@ -36,6 +36,7 @@
         ctags
         whitespace
         haskell-mode
+        sml-mode
         clojure-mode
         scala-mode2
         sml-mode
