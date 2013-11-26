@@ -39,10 +39,13 @@
         sml-mode
         clojure-mode
         scala-mode2
+        js2-mode
+        js2-refactor
         lua-mode
-        smartparens
+        rainbow-delimiters
         projectile
         helm
+        auto-complete
         zencoding-mode
         )
       (mapcar 'el-get-source-name el-get-sources)))
@@ -53,7 +56,7 @@
 
 (evil-mode 1)
 
-(load (concat user-emacs-directory "init-smartparens"))
+(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
 ;;{{{ Backup location changing
 (make-directory "~/.emacs.d/autosaves/" t)
@@ -99,13 +102,6 @@
 ;(if window-system
   (add-to-list 'default-frame-alist '(font . "Anonymous Pro-9"))
 ;)
-
-(set-face-attribute
-  'sp-pair-overlay-face nil
-  :inherit nil
-)
-
-(set-face-attribute 'sp-show-pair-match-face nil :background "SteelBlue4")
 
 ;;{{{ whitespace & 80 chars
 (require 'whitespace)
