@@ -42,7 +42,7 @@
         js2-mode
         js2-refactor
         lua-mode
-        rainbow-delimiters
+        highlight-parentheses
         projectile
         helm
         auto-complete
@@ -56,7 +56,7 @@
 
 (evil-mode 1)
 
-(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'prog-mode-hook 'highlight-parentheses-mode)
 
 ;;{{{ Backup location changing
 (make-directory "~/.emacs.d/autosaves/" t)
