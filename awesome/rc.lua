@@ -112,6 +112,15 @@ separator = wibox.widget.imagebox()
 separator:set_image(conf_dir .. "/icons/separator.png")
 -- }}}
 
+-- {{{ Battery state
+baticon = wibox.widget.imagebox()
+baticon:set_image(conf_dir .. "/icons/bat.png")
+-- Initialize widget
+batwidget = wibox.widget.textbox()
+-- Register widget
+vicious.register(batwidget, vicious.widgets.bat, "$1$2%", 61, "BAT0")
+-- }}}
+
 -- }}}
 
 -- {{{ wibox
@@ -190,6 +199,9 @@ for s = 1, screen.count() do
 
    -- Widgets that are aligned to the right
    local right_layout = wibox.layout.fixed.horizontal()
+   right_layout:add(baticon)
+   right_layout:add(batwidget)
+   right_layout:add(separator)
    if s == 1 then right_layout:add(wibox.widget.systray()) end
    right_layout:add(mytextclock)
    right_layout:add(mylayoutbox[s])

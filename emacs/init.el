@@ -21,7 +21,7 @@
 
 ;; local sources
 (setq el-get-sources
-  '((:name ensime :load-path("./dist_2.10.0/elisp"))))
+  '((:name ensime :load-path("./dist_2.10.2/elisp"))))
 
 (setq my-packages
      (append
@@ -36,6 +36,7 @@
         ctags
         whitespace
         haskell-mode
+        ghc-mod
         sml-mode
         clojure-mode
         scala-mode2
