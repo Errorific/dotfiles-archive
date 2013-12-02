@@ -32,6 +32,12 @@ zstyle ':prezto:load' pmodule \
   'spectrum' \
   'utility' \
   'completion' \
+  'archive' \
+  'git' \
+  'homebrew' \
+  'ssh' \
+  'tmux' \
+  'syntax-highlighting' \
   'prompt'
 
 #
@@ -110,12 +116,12 @@ zstyle ':prezto:module:prompt' theme 'sorin'
 
 # Set syntax highlighters.
 # By default, only the main highlighter is enabled.
-# zstyle ':prezto:module:syntax-highlighting' highlighters \
-#   'main' \
-#   'brackets' \
-#   'pattern' \
-#   'cursor' \
-#   'root'
+ zstyle ':prezto:module:syntax-highlighting' highlighters \
+   'main' \
+   'brackets' \
+   'pattern' \
+   'cursor' \
+   'root'
 #
 # Set syntax highlighting styles.
 # zstyle ':prezto:module:syntax-highlighting' styles \
@@ -136,8 +142,8 @@ zstyle ':prezto:module:terminal' auto-title 'yes'
 #
 
 # Auto start a session when Zsh is launched in a local terminal.
-# zstyle ':prezto:module:tmux:auto-start' local 'yes'
+zstyle ':prezto:module:tmux:auto-start' local 'yes'
 
 # Auto start a session when Zsh is launched in a SSH connection.
-# zstyle ':prezto:module:tmux:auto-start' remote 'yes'
+zstyle ':prezto:module:tmux:auto-start' remote 'yes'
 
