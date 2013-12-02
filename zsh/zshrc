@@ -12,3 +12,5 @@ fi
 
 # Customize to your needs...
 . `brew --prefix`/etc/profile.d/z.sh
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
