@@ -39,7 +39,7 @@
         ghc-mod
         sml-mode
         clojure-mode
-        nrepl
+        nREPL
         scala-mode2
         js2-mode
         js2-refactor
