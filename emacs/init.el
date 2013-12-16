@@ -39,7 +39,6 @@
         ghc-mod
         sml-mode
         clojure-mode
-        clojure-test-mode
         nrepl
         scala-mode2
         js2-mode
