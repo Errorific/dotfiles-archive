@@ -39,6 +39,8 @@
         ghc-mod
         sml-mode
         clojure-mode
+        clojure-test-mode
+        nrepl
         scala-mode2
         js2-mode
         js2-refactor
@@ -47,6 +49,7 @@
         projectile
         helm
         auto-complete
+        ac-nrepl
         zencoding-mode
         )
       (mapcar 'el-get-source-name el-get-sources)))
@@ -101,7 +104,7 @@
 ;(setq helm-input-idle-delay 0.1)
 
 ;(if window-system
-  (add-to-list 'default-frame-alist '(font . "Anonymous Pro-9"))
+  (add-to-list 'default-frame-alist '(font . "Anonymous Pro-12"))
 ;)
 
 ;;{{{ whitespace & 80 chars
