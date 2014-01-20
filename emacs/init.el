@@ -108,9 +108,12 @@
 ;(setq helm-idle-delay 0.1)
 ;(setq helm-input-idle-delay 0.1)
 
-;(if window-system
-  (add-to-list 'default-frame-alist '(font . "Anonymous Pro-12"))
-;)
+(if window-system
+  (if (eq system-type 'darwin)
+    (add-to-list 'default-frame-alist '(font . "Anonymous Pro-12"))
+    (add-to-list 'default-frame-alist '(font . "Anonymous Pro-09"))
+  )
+)
 
 ;;{{{ whitespace & 80 chars
 (require 'whitespace)
