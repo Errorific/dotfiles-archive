@@ -36,15 +36,18 @@
         ctags
         whitespace
         haskell-mode
+        markdown-mode
         ghc-mod
         sml-mode
         clojure-mode
+        paredit
         nREPL
         scala-mode2
         js2-mode
         js2-refactor
         lua-mode
         highlight-parentheses
+;;        rainbow-delimiters
         projectile
         helm
         auto-complete
@@ -61,6 +64,8 @@
 (setq evil-default-cursor t)
 
 (add-hook 'prog-mode-hook 'highlight-parentheses-mode)
+;;(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'clojure-mode-hook 'paredit-mode)
 
 ;;{{{ Backup location changing
 (make-directory "~/.emacs.d/autosaves/" t)
