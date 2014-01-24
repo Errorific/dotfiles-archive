@@ -27,7 +27,7 @@
      (append
       '(
         el-get
-        evil
+;;        evil
         cperl-mode
         tomorrow-theme
         coffee-mode
@@ -45,6 +45,7 @@
         scala-mode2
         js2-mode
         js2-refactor
+        yaml-mode
         lua-mode
         highlight-parentheses
 ;;        rainbow-delimiters
@@ -60,8 +61,8 @@
 (el-get 'sync my-packages)
 ;;}}}
 
-(evil-mode 1)
-(setq evil-default-cursor t)
+;;(evil-mode 1)
+;;(setq evil-default-cursor t)
 
 (add-hook 'prog-mode-hook 'highlight-parentheses-mode)
 ;;(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
