@@ -27,7 +27,9 @@
      (append
       '(
         el-get
-;;        evil
+        evil
+        evil-surround
+        evil-matchit
         cperl-mode
         tomorrow-theme
         coffee-mode
@@ -49,6 +51,7 @@
         lua-mode
         highlight-parentheses
 ;;        rainbow-delimiters
+        grizzl
         projectile
         helm
         auto-complete
@@ -61,8 +64,8 @@
 (el-get 'sync my-packages)
 ;;}}}
 
-;;(evil-mode 1)
-;;(setq evil-default-cursor t)
+(evil-mode 1)
+(setq evil-default-cursor t)
 
 (add-hook 'prog-mode-hook 'highlight-parentheses-mode)
 ;;(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
@@ -102,8 +105,13 @@
 (require 'color-theme-tomorrow)
 (color-theme-tomorrow-night)
 
+(setq inhibit-startup-screen t)
+
 (projectile-global-mode)
 (global-set-key (kbd "C-c h") 'helm-projectile)
+(setq projectile-enable-caching t)
+(setq projectile-require-project-root nil)
+(setq projectile-completion-system 'grizzl)
 ;(global-set-key (kbd "C-c h") 'helm-mini)
 (helm-mode 1)
 ;(setq helm-idle-delay 0.1)

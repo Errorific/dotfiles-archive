@@ -1,0 +1,9 @@
+(:name evil-matchit
+ :website "https://github.com/redguardtoo/evil-matchit"
+ :description "Vim matchit.vim by Benji Fisher ported into Emacs."
+ :type github
+ :pkgname "redguardtoo/evil-matchit"
+ :features evil-matchit
+ :post-init (global-evil-matchit-mode 1)
+ :depends evil)
+
