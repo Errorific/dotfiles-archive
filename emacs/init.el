@@ -49,6 +49,7 @@
         js2-refactor
         yaml-mode
         lua-mode
+        sass-mode
         highlight-parentheses
 ;;        rainbow-delimiters
         grizzl
