@@ -6,3 +6,5 @@
 )
 (add-hook 'org-mode-hook 'nolinum)
 (add-hook 'project-explorer-mode-hook 'nolinum)
+(add-hook 'term-mode-hook 'nolinum)
+(add-hook 'magit-mode-hook 'nolinum)
