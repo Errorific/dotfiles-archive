@@ -1,3 +1,6 @@
+;;; init.el --- My emacs configuration
+;;; Commentary:
+;;; Code:
 (mapc
  (lambda (mode)
    (when (fboundp mode)
@@ -31,12 +34,15 @@
 
 ;;;; Packages
 
+(load-local "etc/linum")
 (load-local "etc/evil")
+(load-local "etc/rainbow-delimiters")
 (load-local "etc/flycheck")
 (load-local "etc/projectile")
 ;;(load-local "etc/project-explorer")
 (load-local "etc/idle-highlight-mode")
 (load-local "etc/flx-ido")
+(load-local "etc/js2-mode")
 
 (bind-key "<C-tab>" 'project-explorer-open)
 
@@ -52,7 +58,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-)
+ '(haskell-mode-hook (quote (capitalized-words-mode turn-on-haskell-doc turn-on-haskell-indent turn-on-haskell-simple-indent))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

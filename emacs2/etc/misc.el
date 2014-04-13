@@ -22,8 +22,11 @@
 ;; Initial major mode is Emacs Lisp mode
 (setq initial-major-mode 'emacs-lisp-mode)
 
-;; Indent with spaces instead of tabs
+;; Indent with spaces instead of tabs and width 2
 (setq-default indent-tabs-mode nil)
+(setq tab-width 2) ; or any other preferred value
+(defvaralias 'c-basic-offset 'tab-width)
+(defvaralias 'cperl-indent-level 'tab-width)
 
 ;; Truncate lines
 (set-default 'truncate-lines t)
