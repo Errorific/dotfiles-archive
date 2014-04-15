@@ -1,5 +1,5 @@
-(source melpa)
 (source gnu)
+(source melpa)
 
 (depends-on "cl-lib")
 (depends-on "color-theme-sanityinc-tomorrow")
@@ -15,6 +15,7 @@
 (depends-on "ht")
 (depends-on "idle-highlight-mode")
 (depends-on "js2-mode")
+(depends-on "magit")
 (depends-on "pallet")
 (depends-on "project-explorer")
 (depends-on "projectile")

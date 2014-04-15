@@ -92,3 +92,7 @@
 
 (setq backup-directory-alist `((".*" . ,(locate-user-emacs-file ".backup")))
       auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
+
+(add-hook
+ 'term-mode-hook
+ (lambda() (setq show-trailing-whitespace nil)))
