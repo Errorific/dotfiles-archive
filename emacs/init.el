@@ -20,8 +20,8 @@
 (add-to-list 'el-get-recipe-path' "~/.emacs.d/custom-recipes")
 
 ;; local sources
-(setq el-get-sources
-  '((:name ensime :load-path("./dist_2.10.2/elisp"))))
+;(setq el-get-sources
+;  '((:name ensime :load-path("./dist_2.10.2/elisp"))))
 
 (setq my-packages
      (append
@@ -44,6 +44,7 @@
         clojure-mode
         paredit
         nREPL
+        magit
         scala-mode2
         js2-mode
         js2-refactor
@@ -51,13 +52,16 @@
         lua-mode
         sass-mode
         highlight-parentheses
+        flycheck
 ;;        rainbow-delimiters
         grizzl
         projectile
+        project-explorer
         helm
         auto-complete
         ac-nrepl
-        zencoding-mode
+        smart-tab
+;;        zencoding-mode
         )
       (mapcar 'el-get-source-name el-get-sources)))
 
@@ -99,8 +103,14 @@
       column-number-mode t
       fill-column 80
 )
+
+(setq-default ac-sources '(ac-source-words-in-same-mode-buffers))
+(ac-set-trigger-key "TAB")
+(global-smart-tab-mode 1)
+
 (scroll-bar-mode -1)
 (global-linum-mode 1)
+(global-flycheck-mode t)
 ;(load-theme 'zenburn t)
 ;(load-theme 'solarized-dark t)
 (require 'color-theme-tomorrow)
@@ -110,7 +120,7 @@
 
 (projectile-global-mode)
 (global-set-key (kbd "C-c h") 'helm-projectile)
-(setq projectile-enable-caching t)
+;(setq projectile-enable-caching t)
 (setq projectile-require-project-root nil)
 (setq projectile-completion-system 'grizzl)
 ;(global-set-key (kbd "C-c h") 'helm-mini)
@@ -125,6 +135,9 @@
   )
 )
 
+(set-frame-parameter (selected-frame) 'alpha '(90 75))
+(add-to-list 'default-frame-alist '(alpha 90 75))
+
 ;;{{{ whitespace & 80 chars
 (require 'whitespace)
 ;; set the types of bad whitespace
@@ -133,4 +146,3 @@
 (setq whitespace-action '(auto-cleanup))
 (global-whitespace-mode t)
 ;;}}}
-
