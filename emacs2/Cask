@@ -22,3 +22,4 @@
 (depends-on "rainbow-delimiters")
 (depends-on "scala-mode2")
 (depends-on "use-package")
+(depends-on "yaml-mode")

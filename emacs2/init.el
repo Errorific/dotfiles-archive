@@ -43,6 +43,7 @@
 (load-local "etc/idle-highlight-mode")
 (load-local "etc/flx-ido")
 (load-local "etc/js2-mode")
+(load-local "etc/yaml-mode")
 
 (bind-key "<C-tab>" 'project-explorer-open)
 

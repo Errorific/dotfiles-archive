@@ -20,7 +20,7 @@
 (setq browse-url-generic-program "google-chrome")
 
 ;; Initial major mode is Emacs Lisp mode
-(setq initial-major-mode 'emacs-lisp-mode)
+(setq initial-major-mode 'text-mode)
 
 ;; Indent with spaces instead of tabs and width 2
 (setq-default indent-tabs-mode nil)
@@ -96,3 +96,5 @@
 (add-hook
  'term-mode-hook
  (lambda() (setq show-trailing-whitespace nil)))
+
+(add-hook 'before-save-hook 'whitespace-cleanup)
