@@ -1,4 +1,4 @@
-;;; init.el --- My emacs configuration
+;; init.el --- My emacs configuration
 ;;; Commentary:
 ;;; Code:
 (mapc
@@ -6,6 +6,11 @@
    (when (fboundp mode)
      (funcall mode -1)))
  '(menu-bar-mode tool-bar-mode scroll-bar-mode))
+
+(setq exec-path
+      (append exec-path
+              '("/Users/bkolera/.cabal/bin/"
+                "/usr/local/bin/")))
 
 (require 'cask "/usr/local/Cellar/cask/0.6.0/cask.el")
 (cask-initialize)
@@ -44,6 +49,9 @@
 (load-local "etc/flx-ido")
 (load-local "etc/js2-mode")
 (load-local "etc/yaml-mode")
+(load-local "etc/haskell-mode")
+(load-local "etc/ghc")
+;;(load-local "etc/structured-haskell-mode")
 
 (bind-key "<C-tab>" 'project-explorer-open)
 
@@ -59,7 +67,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(haskell-mode-hook (quote (capitalized-words-mode turn-on-haskell-doc turn-on-haskell-indent turn-on-haskell-simple-indent))))
+)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
