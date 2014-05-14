@@ -51,7 +51,7 @@
 (load-local "etc/flx-ido")
 (load-local "etc/js2-mode")
 (load-local "etc/yaml-mode")
-(load-local "etc/ghc")
+;;(load-local "etc/ghc")
 (load-local "etc/haskell-mode")
 ;;(load-local "etc/structured-haskell-mode")
 
