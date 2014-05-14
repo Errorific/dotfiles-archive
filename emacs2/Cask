@@ -2,7 +2,9 @@
 (source melpa)
 
 (depends-on "auto-complete")
+(depends-on "auto-complete-exuberant-ctags")
 (depends-on "bind-key")
+(depends-on "cask")
 (depends-on "cl-lib")
 (depends-on "coffee-mode")
 (depends-on "color-theme-sanityinc-tomorrow")

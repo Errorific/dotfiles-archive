@@ -7,10 +7,10 @@
      (funcall mode -1)))
  '(menu-bar-mode tool-bar-mode scroll-bar-mode))
 
-(setq exec-path
-      (append exec-path
-              '("/Users/bkolera/.cabal/bin/"
-                "/usr/local/bin/")))
+;;(setq exec-path
+;;      (append exec-path
+;;              '("/Users/cmckay/.cabal/bin/"
+;;                "/usr/local/bin/")))
 
 (require 'cask "/usr/local/Cellar/cask/0.6.0/cask.el")
 (cask-initialize)
@@ -41,7 +41,9 @@
 
 (load-local "etc/linum")
 (load-local "etc/evil")
+(load-local "etc/evil-nerd-commenter")
 (load-local "etc/rainbow-delimiters")
+(load-local "etc/auto-complete")
 (load-local "etc/flycheck")
 (load-local "etc/projectile")
 ;;(load-local "etc/project-explorer")
@@ -49,8 +51,8 @@
 (load-local "etc/flx-ido")
 (load-local "etc/js2-mode")
 (load-local "etc/yaml-mode")
-(load-local "etc/haskell-mode")
 (load-local "etc/ghc")
+(load-local "etc/haskell-mode")
 ;;(load-local "etc/structured-haskell-mode")
 
 (bind-key "<C-tab>" 'project-explorer-open)
