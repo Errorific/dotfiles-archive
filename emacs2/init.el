@@ -7,11 +7,6 @@
      (funcall mode -1)))
  '(menu-bar-mode tool-bar-mode scroll-bar-mode))
 
-;;(setq exec-path
-;;      (append exec-path
-;;              '("/Users/cmckay/.cabal/bin/"
-;;                "/usr/local/bin/")))
-
 (require 'cask "/usr/local/Cellar/cask/0.6.0/cask.el")
 (cask-initialize)
 (require 'pallet)
