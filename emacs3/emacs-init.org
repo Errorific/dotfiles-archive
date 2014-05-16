@@ -332,7 +332,8 @@
      (req-package linum
        :config
        (add-hook 'prog-mode-hook
-                 '(lambda () (linum-mode 1))))
+                 '(lambda () (linum-mode 1))
+                 '(lambda () (column-number-mode 1))))
    #+END_SRC
 
 *** Relative Line Numbers
