@@ -149,16 +149,19 @@
     and decrementing numbers with =C-a= and =C-x=, respectively, likely because
     these are already important bindings in Emacs. However, by limiting the
     effect to normal mode, we can use [[https://github.com/cofi/evil-numbers][evil-numbers]] to bring this functionality
-    back without stomping all over existing bindings.
-
-    :config
-    (progn
-      (bind-key "C-a" 'evil-numbers/inc-at-pt evil-normal-state-map)
-      (bind-key "C-x" 'evil-numbers/dec-at-pt evil-normal-state-map)))
+    back without stomping all over existing bindings. I've removed those 2
+    bindings because they are annoying me.
 
     #+BEGIN_SRC emacs-lisp
       (req-package evil-numbers
                    :require evil)
+    #+END_SRC
+
+    #+BEGIN_SRC emacs-list :tangle no
+    :config
+    (progn
+      (bind-key "C-a" 'evil-numbers/inc-at-pt evil-normal-state-map)
+      (bind-key "C-x" 'evil-numbers/dec-at-pt evil-normal-state-map)))
     #+END_SRC
 
 *** =evil-surround=
