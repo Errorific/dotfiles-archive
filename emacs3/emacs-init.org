@@ -141,7 +141,9 @@
                        "k" 'kill-buffer
                        "K" 'kill-buffer-and-window
                        "f" 'dired
-                       "gs" 'magit-status)))
+                       "gs" 'magit-status)
+                     (evil-leader/set-key-for-mode 'haskell-mode
+                       "?" 'ghc-display-errors)))
     #+END_SRC
 
 *** =evil-numbers=
@@ -308,6 +310,15 @@
                   :diminish (server-buffer-clients . ""))
    #+END_SRC
 
+** popwin
+   This is a tool for limiting the size of windows that open
+
+   #+BEGIN_SRC emacs-lisp
+     (req-package popwin
+       :config (progn
+         (setq display-buffer-function 'popwin:display-buffer)))
+   #+END_SRC
+
 * IDE
   A few conveniences that I like to have in all my =prog-mode= buffers.
 
@@ -317,9 +328,11 @@
 
    #+BEGIN_SRC emacs-lisp
      (req-package flycheck
+       :requires popwin
        :diminish (global-flycheck-mode . " ✓ ")
-       :config
-       (add-hook 'after-init-hook 'global-flycheck-mode))
+       :config (progn
+         (add-hook 'after-init-hook 'global-flycheck-mode)
+         (push '(flycheck-error-list-mode :stick t) popwin:special-display-config)))
    #+END_SRC
 
 ** Magit
@@ -343,7 +356,7 @@
     I was a little spoiled by this feature in Vim, and not having it
     just doesn't sit well with me.
 
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle no
       (req-package linum-relative
         :init (setq linum-relative-current-symbol ""))
     #+END_SRC
@@ -493,7 +506,7 @@
 ** Haskell
    #+BEGIN_SRC emacs-lisp
      (req-package haskell-mode
-       :require (flycheck flycheck-haskell)
+       :require (flycheck flycheck-haskell popwin)
        :commands haskell-mode
        :init
        (add-to-list 'auto-mode-alist '("\\.l?hs$" . haskell-mode))
@@ -523,7 +536,9 @@
          (setq haskell-literate-default 'tex)
          (setq haskell-stylish-on-save t)
          (setq haskell-tags-on-save t)
-         (add-hook 'haskell-mode-hook 'my-haskell-hook)))
+         (add-hook 'haskell-mode-hook 'my-haskell-hook)
+         (push '("*haskell*" :stick t) popwin:special-display-config)
+          ))
 
      (req-package flycheck-haskell
        :config (add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
