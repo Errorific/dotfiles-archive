@@ -107,7 +107,7 @@
          (evil-mode 1)
          (setq evil-motion-state-modes
                (append evil-emacs-state-modes evil-motion-state-modes))
-         (setq evil-emacs-state-modes '(magit-mode dired-mode)))
+         (setq evil-emacs-state-modes '(magit-mode git-status-mode grep-mode dired-mode)))
        :config
        (progn
          (bind-key "[escape]" 'keyboard-escape-quit evil-normal-state-map)
@@ -125,7 +125,7 @@
 
     #+BEGIN_SRC emacs-lisp
       (req-package evil-leader
-                   :require evil
+                   :require (evil evil-nerd-commenter)
                    :ensure evil-leader
                    :init
                    (progn
@@ -141,6 +141,7 @@
                        "k" 'kill-buffer
                        "K" 'kill-buffer-and-window
                        "f" 'dired
+                       "c" 'evilnc-comment-or-uncomment-lines
                        "gs" 'magit-status)
                      (evil-leader/set-key-for-mode 'haskell-mode
                        "?" 'ghc-display-errors)))
@@ -196,6 +197,12 @@
 *** =ace-jump-mode=
     #+BEGIN_SRC emacs-lisp
       (req-package ace-jump-mode)
+    #+END_SRC
+
+*** =evil-nerd-commenter=
+    #+BEGIN_SRC emacs-lisp
+      (req-package evil-nerd-commenter
+        :require evil)
     #+END_SRC
 
 * Projectile
@@ -326,13 +333,13 @@
    Flycheck has helped me write more programs than I'm totally
    comfortable admitting.
 
+       :requires popwin
+         (push '(flycheck-error-list-mode :stick t) popwin:special-display-config)))
    #+BEGIN_SRC emacs-lisp
      (req-package flycheck
-       :requires popwin
        :diminish (global-flycheck-mode . " ✓ ")
        :config (progn
-         (add-hook 'after-init-hook 'global-flycheck-mode)
-         (push '(flycheck-error-list-mode :stick t) popwin:special-display-config)))
+         (add-hook 'after-init-hook 'global-flycheck-mode)))
    #+END_SRC
 
 ** Magit
@@ -346,10 +353,15 @@
 ** Line Numbers
    #+BEGIN_SRC emacs-lisp
      (req-package linum
-       :config
-       (add-hook 'prog-mode-hook
-                 '(lambda () (linum-mode 1))
-                 '(lambda () (column-number-mode 1))))
+       :config (progn
+         (add-hook 'prog-mode-hook
+                   '(lambda () (linum-mode 1))
+                   '(lambda () (column-number-mode 1)))
+         (defun nolinum () (linum-mode 0))
+         (add-hook 'org-mode-hook 'nolinum)
+         (add-hook 'project-explorer-mode-hook 'nolinum)
+         (add-hook 'term-mode-hook 'nolinum)
+         (add-hook 'magit-mode-hook 'nolinum)))
    #+END_SRC
 
 *** Relative Line Numbers
@@ -544,7 +556,9 @@
        :config (add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
    #+END_SRC
 *** Structured Haskell Mode
-    #+BEGIN_SRC emacs-lisp
+    Sometimes I think this is awesome, other times I think it is rage inducing.
+    Currently we are in the rage inducing part of the cycle.
+    #+BEGIN_SRC emacs-lisp :tangle no
       (req-package shm
                    :require haskell-mode
                    :commands structured-haskell-mode
@@ -553,7 +567,7 @@
     #+END_SRC
 
 *** ghc-mod
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle no
       (req-package ghc
         :init (add-hook 'haskell-mode-hook (lambda () (ghc-init))))
     #+END_SRC
@@ -582,6 +596,11 @@
 ** Scala
    #+BEGIN_SRC emacs-lisp
      (req-package scala-mode2)
+   #+END_SRC
+
+** Perl
+   #+BEGIN_SRC emacs-lisp
+     (defalias 'perl-mode 'cperl-mode)
    #+END_SRC
 
 * Annoyances
