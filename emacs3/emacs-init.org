@@ -516,6 +516,7 @@
 
 * Languages
 ** Haskell
+         (setq haskell-font-lock-symbols 'unicode)
    #+BEGIN_SRC emacs-lisp
      (req-package haskell-mode
        :require (flycheck flycheck-haskell popwin)
@@ -544,7 +545,6 @@
            (diminish 'eldoc-mode "")
            (turn-on-haskell-decl-scan)
            (setq evil-auto-indent nil))
-         (setq haskell-font-lock-symbols 'unicode)
          (setq haskell-literate-default 'tex)
          (setq haskell-stylish-on-save t)
          (setq haskell-tags-on-save t)
