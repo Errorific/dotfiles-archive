@@ -17,11 +17,10 @@ set list
 set listchars=tab:,.,trail:.,extends:#,nbsp:. " Highlight problematic whitespace
 
 set background=dark
-set t_Co=256
+" set t_Co=256
 
-let g:zenburn_old_Visual = 1
-let g:zenburn_high_Contrast = 1
-colors zenburn
+syntax on
+syntax enable
 
 set clipboard=unnamedplus " clipboard handler
 set hidden "allows buffers to go into background unsaved

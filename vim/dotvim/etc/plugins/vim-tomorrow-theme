@@ -1,0 +1,3 @@
+Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
+
+color tomorrow-night

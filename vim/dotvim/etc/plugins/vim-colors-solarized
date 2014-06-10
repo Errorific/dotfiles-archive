@@ -1,7 +1,7 @@
 Bundle 'altercation/vim-colors-solarized'
 
 let g:solarized_termcolors=256
-color solarized
+" color solarized
 
 let g:solarized_termtrans=1
 let g:solarized_contrast="high"

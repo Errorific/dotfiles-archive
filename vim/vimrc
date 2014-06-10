@@ -5,16 +5,18 @@ source ~/.vim/etc/plugins/vundle
 source ~/.vim/etc/plugins/nerdtree
 source ~/.vim/etc/plugins/nerdcommenter
 source ~/.vim/etc/plugins/ultisnips
-source ~/.vim/etc/plugins/vim-perl
-source ~/.vim/etc/plugins/vim-scala
+"source ~/.vim/etc/plugins/vim-perl
+source ~/.vim/etc/plugins/vim-polyglot
+"source ~/.vim/etc/plugins/vim-scala
 source ~/.vim/etc/plugins/perlomni
 source ~/.vim/etc/plugins/play2vim
 source ~/.vim/etc/plugins/syntastic
 source ~/.vim/etc/plugins/ack
 "source ~/.vim/etc/plugins/vim-easytags
-source ~/.vim/etc/plugins/vim-coffeescript
+"source ~/.vim/etc/plugins/vim-coffeescript
 source ~/.vim/etc/plugins/vim-colors
-source ~/.vim/etc/plugins/vim-zenburn
+"source ~/.vim/etc/plugins/vim-zenburn
+source ~/.vim/etc/plugins/vim-tomorrow-theme
 source ~/.vim/etc/plugins/vim-fugitive
 "source ~/.vim/etc/plugins/vimside
 source ~/.vim/etc/plugins/supertab
@@ -26,8 +28,10 @@ source ~/.vim/etc/ui
 source ~/.vim/etc/keys
 source ~/.vim/etc/dirs
 
+"syntax on
+
 filetype on
 filetype plugin on
 filetype indent on
 
-
+"syntax enable
