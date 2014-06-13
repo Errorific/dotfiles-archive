@@ -132,6 +132,7 @@
                      (evil-leader/set-leader "<SPC>")
                      (global-evil-leader-mode 1)
                      (evil-leader/set-key
+                       "a" 'projectile-ag
                        "l" 'org-insert-link
                        "o" 'other-window
                        "d" 'delete-window
@@ -317,15 +318,6 @@
                   :diminish (server-buffer-clients . ""))
    #+END_SRC
 
-** popwin
-   This is a tool for limiting the size of windows that open
-
-   #+BEGIN_SRC emacs-lisp
-     (req-package popwin
-       :config (progn
-         (setq display-buffer-function 'popwin:display-buffer)))
-   #+END_SRC
-
 * IDE
   A few conveniences that I like to have in all my =prog-mode= buffers.
 
@@ -333,8 +325,6 @@
    Flycheck has helped me write more programs than I'm totally
    comfortable admitting.
 
-       :requires popwin
-         (push '(flycheck-error-list-mode :stick t) popwin:special-display-config)))
    #+BEGIN_SRC emacs-lisp
      (req-package flycheck
        :diminish (global-flycheck-mode . " ✓ ")
@@ -433,6 +423,17 @@
      (req-package ggtags)
    #+END_SRC
 
+** Ag
+   Support for the ag tool for doing file searching
+
+   #+BEGIN_SRC emacs-lisp
+     (req-package ag
+       :config (progn
+         (setq ag-highlight-search t)
+       )
+     )
+   #+END_SRC
+
 * Behaviour
 
 ** Indentation
@@ -519,7 +520,7 @@
          (setq haskell-font-lock-symbols 'unicode)
    #+BEGIN_SRC emacs-lisp
      (req-package haskell-mode
-       :require (flycheck flycheck-haskell popwin)
+       :require (flycheck flycheck-haskell)
        :commands haskell-mode
        :init
        (add-to-list 'auto-mode-alist '("\\.l?hs$" . haskell-mode))
@@ -549,7 +550,6 @@
          (setq haskell-stylish-on-save t)
          (setq haskell-tags-on-save t)
          (add-hook 'haskell-mode-hook 'my-haskell-hook)
-         (push '("*haskell*" :stick t) popwin:special-display-config)
           ))
 
      (req-package flycheck-haskell
