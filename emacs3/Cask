@@ -3,6 +3,4 @@
 
 (depends-on "pallet")
 (depends-on "req-package")
-;;(depends-on "color-theme-sanityinc-tomorrow")
-;;(depends-on "evil")
 (depends-on "org")
