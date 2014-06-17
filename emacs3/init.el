@@ -10,7 +10,8 @@
 (cask-initialize)
 
 (require 'ob-tangle)
-;; (setq debug-on-error t)
+(setq debug-on-error nil)
+(setq vc-follow-symlinks t)
 (org-babel-load-file
   (expand-file-name "emacs-init.org"
                     user-emacs-directory))

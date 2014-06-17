@@ -526,6 +526,7 @@
        (add-to-list 'auto-mode-alist '("\\.l?hs$" . haskell-mode))
        :config
        (progn
+         (setq warning-suppress-types (append '(stylish-haskell) warning-suppress-types))
          (req-package inf-haskell)
          (req-package hs-lint)
          (bind-key "C-x C-d" nil haskell-mode-map)
