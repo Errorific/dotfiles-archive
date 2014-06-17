@@ -546,6 +546,7 @@
            (turn-on-eldoc-mode)
            (diminish 'eldoc-mode "")
            (turn-on-haskell-decl-scan)
+           (turn-on-haskell-indentation)
            (setq evil-auto-indent nil))
          (setq haskell-literate-default 'tex)
          (setq haskell-stylish-on-save t)
