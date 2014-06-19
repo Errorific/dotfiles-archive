@@ -107,7 +107,15 @@
          (evil-mode 1)
          (setq evil-motion-state-modes
                (append evil-emacs-state-modes evil-motion-state-modes))
-         (setq evil-emacs-state-modes '(magit-mode git-status-mode grep-mode dired-mode)))
+         (setq evil-emacs-state-modes
+           '(magit-mode
+             magit-commit-mode
+             magit-log-mode
+             magit-status-mode
+             magit-stash-mode
+             git-status-mode
+             grep-mode
+             dired-mode)))
        :config
        (progn
          (bind-key "[escape]" 'keyboard-escape-quit evil-normal-state-map)
@@ -260,7 +268,7 @@
        (mapc #'disable-theme custom-enabled-themes))
 
      (req-package color-theme-sanityinc-tomorrow
-       :init (load-theme 'sanityinc-tomorrow-night :no-confirm))
+       :init (load-theme 'sanityinc-tomorrow-eighties :no-confirm))
    #+END_SRC
 
 ** Modeline
