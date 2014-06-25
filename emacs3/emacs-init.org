@@ -451,7 +451,6 @@
      (setq-default indent-tabs-mode nil)
      (setq tab-width 2) ; or any other preferred value
      (defvaralias 'c-basic-offset 'tab-width)
-     (defvaralias 'cperl-indent-level 'tab-width)
    #+END_SRC
 
 ** UTF8
@@ -611,6 +610,15 @@
 ** Perl
    #+BEGIN_SRC emacs-lisp
      (defalias 'perl-mode 'cperl-mode)
+     (setq cperl-indent-level 2
+           cperl-indent-parens-as-block t
+           cperl-indent-subs-specially nil
+           cperl-continued-statement-offset 2
+           cperl-continued-brace-offset 0
+           cperl-close-paren-offset -2
+           cperl-tabs-always-indent nil
+           cperl-sub-keywords '("sub" "method" "func")
+     )
    #+END_SRC
 
 * Annoyances
