@@ -621,6 +621,16 @@
      )
    #+END_SRC
 
+** YAML
+   It's a real language now...
+
+   #+BEGIN_SRC emacs-lisp
+     (req-package yaml-mode
+       :require (flycheck)
+       :init (add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode))
+     )
+   #+END_SRC
+
 * Annoyances
   Fixing a couple of gripes I have with Emacs.
 
