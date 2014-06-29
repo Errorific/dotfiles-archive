@@ -36,7 +36,6 @@
 
      (depends-on "pallet")
      (depends-on "req-package")
-     (depends-on "moe-theme")
      (depends-on "evil")
      (depends-on "org")
    #+END_SRC
@@ -255,22 +254,6 @@
           (flx-ido-mode 1)))
    #+END_SRC
 
-** Theme
-   I've switched entirely to dark themes to make working with
-   Structured Haskell Mode easier.
-
-   I also advise =load-theme= to fully unload the previous theme
-   before loading a new one.
-
-   #+BEGIN_SRC emacs-lisp
-     (defadvice load-theme
-       (before theme-dont-propagate activate)
-       (mapc #'disable-theme custom-enabled-themes))
-
-     (req-package color-theme-sanityinc-tomorrow
-       :init (load-theme 'sanityinc-tomorrow-eighties :no-confirm))
-   #+END_SRC
-
 ** Modeline
    Powerline is very popular in Vim (and with Evil users), but I much prefer
    [[https://github.com/Bruce-Connor/smart-mode-line][smart-mode-line]]. It's compatible with just about anything you can imagine,
@@ -290,6 +273,22 @@
     #+BEGIN_SRC emacs-lisp :tangle no
       (req-package powerline)
     #+END_SRC
+
+** Theme
+   I've switched entirely to dark themes to make working with
+   Structured Haskell Mode easier.
+
+   I also advise =load-theme= to fully unload the previous theme
+   before loading a new one.
+
+   #+BEGIN_SRC emacs-lisp
+     (defadvice load-theme
+       (before theme-dont-propagate activate)
+       (mapc #'disable-theme custom-enabled-themes))
+
+     (req-package color-theme-sanityinc-tomorrow
+       :init (load-theme 'sanityinc-tomorrow-eighties :no-confirm))
+   #+END_SRC
 
 ** Faces
    #+BEGIN_SRC emacs-lisp
