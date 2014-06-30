@@ -68,6 +68,8 @@ antigen bundles <<EOBUNDLES
   zsh-users/zsh-syntax-highlighting
 EOBUNDLES
 
+antigen bundle petervanderdoes/git-flow-completion
+
 # Load a theme
 #antigen theme sindresorhus/pure pure
 antigen bundle sindresorhus/pure
