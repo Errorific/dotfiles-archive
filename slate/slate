@@ -3,7 +3,8 @@
 config windowHintsShowIcons true
 config windowHintsIgnoreHiddenWindows false
 config windowHintsSpread true
- 
+config windowHintsOrder "persist"
+
 # Abstract positions
 alias full move screenOriginX;screenOriginY screenSizeX;screenSizeY
 alias lefthalf move screenOriginX;screenOriginY screenSizeX/2;screenSizeY
@@ -12,26 +13,26 @@ alias topleft corner top-left resize:screenSizeX/2;screenSizeY/2
 alias topright corner top-right resize:screenSizeX/2;screenSizeY/2
 alias bottomleft corner bottom-left resize:screenSizeX/2;screenSizeY/2
 alias bottomright corner bottom-right resize:screenSizeX/2;screenSizeY/2
- 
+
 # Bind window hinting to cmd+e, using the given letters
 bind e:cmd hint ASDFGHJKLQWERTYUIOPCVBN # use whatever keys you want
- 
-# Press cmd+g to get a grid, drag on that 
+
+# Press cmd+g to get a grid, drag on that
 # grid to determine the size of an app
 bind g:cmd grid padding:5 0:6,2 1:8,2
- 
+
 # use the Slate task switcher (beta)
 #bind tab:cmd switch
- 
+
 # Send a program to a particular screen
 bind 1:alt,ctrl throw 0 resize
 bind 2:alt,ctrl throw 1 resize
- 
+
 # Use the keys below to put the selected window
-bind l:ctrl;alt  ${righthalf}   #...at the right half of the screen
-bind h:ctrl;alt   ${lefthalf}    #...on the left half of the screen
+bind l:ctrl;alt  chain ${righthalf} | ${topright} | ${bottomright}   #...at the right half of the screen
+bind h:ctrl;alt  chain ${lefthalf} | ${topleft} | ${bottomleft}    #...on the left half of the screen
 bind k:ctrl;alt     ${full}        #...fullscreen
- 
+
 # Focus Bindings
 # Shift focus to the app to the
 bind l:cmd    focus right

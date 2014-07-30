@@ -182,9 +182,22 @@
     defaults seem to cover all my needs. Check out the README for some examples.
 
     #+BEGIN_SRC emacs-lisp
-      (req-package surround
+      (req-package evil-surround
                    :require evil
-                   :init (global-surround-mode 1))
+                   :init (global-evil-surround-mode 1))
+    #+END_SRC
+*** =evil-matchit=
+    Allows you to use % to jump between matched tags in html etc instead of
+    just matched delimters
+
+    #+BEGIN_SRC emacs-lisp
+      (req-package evil-matchit
+                   :require (evil tt-mode)
+                   :init (global-evil-matchit-mode 1)
+                   :config (
+                     plist-put evilmi-plugins 'tt-mode '(
+                       (evilmi-simple-get-tag evilmi-simple-jump)
+                       (evilmi-html-get-tag evilmi-html-jump))))
     #+END_SRC
 
 *** =undo-tree=
@@ -296,7 +309,7 @@
                   :config
                   (progn
                     (set-face-attribute 'default nil :family "Source Code Pro")
-                    (set-face-attribute 'default nil :height 120)))
+                    (set-face-attribute 'default nil :height 100)))
    #+END_SRC
 
 ** Cleanup
@@ -352,6 +365,10 @@
      (req-package linum
        :config (progn
          (add-hook 'html-mode-hook
+                   '(lambda () (linum-mode 1)))
+         (add-hook 'tt-mode-hook
+                   '(lambda () (linum-mode 1)))
+         (add-hook 'cperl-mode-hook
                    '(lambda () (linum-mode 1)))
          (add-hook 'prog-mode-hook
                    '(lambda () (linum-mode 1))
@@ -531,7 +548,8 @@
        :require (flycheck flycheck-haskell)
        :commands haskell-mode
        :init
-       (add-to-list 'auto-mode-alist '("\\.l?hs$" . haskell-mode))
+       (add-to-list 'auto-mode-alist '("\\.hs$" . haskell-mode))
+       (add-to-list 'auto-mode-alist '("\\.lhs$" . literate-haskell-mode))
        :config
        (progn
          (setq warning-suppress-types (append '(stylish-haskell) warning-suppress-types))
@@ -604,22 +622,29 @@
    #+END_SRC
 
 ** Scala
+
    #+BEGIN_SRC emacs-lisp
      (req-package scala-mode2)
    #+END_SRC
 
 ** Perl
+
    #+BEGIN_SRC emacs-lisp
-     (defalias 'perl-mode 'cperl-mode)
-     (setq cperl-indent-level 2
-           cperl-indent-parens-as-block t
-           cperl-indent-subs-specially nil
-           cperl-continued-statement-offset 2
-           cperl-continued-brace-offset 0
-           cperl-close-paren-offset -2
-           cperl-tabs-always-indent nil
-           cperl-sub-keywords '("sub" "method" "func")
-     )
+     (req-package cperl-mode
+       :config (progn
+         (setq cperl-indent-level 2
+               cperl-indent-parens-as-block t
+               cperl-indent-subs-specially nil
+               cperl-continued-statement-offset 2
+               cperl-continued-brace-offset 0
+               cperl-close-paren-offset -2
+               cperl-tabs-always-indent nil
+               cperl-sub-keywords '("sub" "method" "func"))
+         (add-to-list 'auto-mode-alist '("\\.t$" . perl-mode))
+         (defalias 'perl-mode 'cperl-mode)
+         (setq cperl-sub-regexp (regexp-opt cperl-sub-keywords))))
+
+     (req-package tt-mode)
    #+END_SRC
 
 ** YAML
@@ -649,7 +674,7 @@
    to emacs that its run under my zsh profile. Most places this is
    block is what you want instead.
 
-   #+BEGIN_SRC emacs-lisp :tangle no
+   #+BEGIN_SRC emacs-lisp
      (req-package exec-path-from-shell
        :init
        (when (memq window-system '(mac ns))
