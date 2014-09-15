@@ -114,6 +114,7 @@
              magit-stash-mode
              git-status-mode
              grep-mode
+             neotree-mode
              dired-mode)))
        :config
        (progn
@@ -150,7 +151,9 @@
                        "K" 'kill-buffer-and-window
                        "f" 'dired
                        "c" 'evilnc-comment-or-uncomment-lines
-                       "gs" 'magit-status)
+                       "gs" 'magit-status
+                       "e"  'er/expand-region
+                       "t"  'neotree-toggle)
                      (evil-leader/set-key-for-mode 'haskell-mode
                        "?" 'ghc-display-errors)))
     #+END_SRC
@@ -274,17 +277,20 @@
 
 
 *** =smart-mode-line=
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle no
       (req-package smart-mode-line
          :init (progn
            (setq sml/shorten-directory t)
            (setq sml/shorten-modes t)
+           (setq sml/theme 'respectful))
+         :config (progn
            (sml/setup)))
     #+END_SRC
 
 *** =powerline=
-    #+BEGIN_SRC emacs-lisp :tangle no
-      (req-package powerline)
+    #+BEGIN_SRC emacs-lisp
+      (req-package powerline-evil
+        :config (powerline-evil-center-color-theme))
     #+END_SRC
 
 ** Theme
@@ -349,6 +355,7 @@
      (req-package flycheck
        :diminish (global-flycheck-mode . " ✓ ")
        :config (progn
+         (setq-default flycheck-disabled-checkers '(perl perl-perlcritic))
          (add-hook 'after-init-hook 'global-flycheck-mode)))
    #+END_SRC
 
@@ -371,7 +378,8 @@
          (add-hook 'cperl-mode-hook
                    '(lambda () (linum-mode 1)))
          (add-hook 'prog-mode-hook
-                   '(lambda () (linum-mode 1))
+                   '(lambda () (linum-mode 1)))
+         (add-hook 'prog-mode-hook
                    '(lambda () (column-number-mode 1)))
          (defun nolinum () (linum-mode 0))
          (add-hook 'org-mode-hook 'nolinum)
@@ -388,6 +396,13 @@
       (req-package linum-relative
         :init (setq linum-relative-current-symbol ""))
     #+END_SRC
+
+** Expand Region
+   Selects around selection
+
+   #+BEGIN_SRC emacs-lisp
+     (req-package expand-region)
+   #+END_SRC
 
 ** Delimiters
    I like my delimiters matched and visually distinct. I used [[https://bitbucket.org/kovisoft/paredit][paredit]] for a
@@ -431,7 +446,7 @@
    #+END_SRC
 
 ** Completion
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle no
      (req-package auto-complete-config
        :require (ac-math)
        :ensure auto-complete
@@ -442,6 +457,14 @@
        :config
        (progn
          (require 'ac-math)))
+   #+END_SRC
+
+   #+BEGIN_SRC emacs-lisp
+     (req-package company
+       :diminish (company-mode . "")
+       :config (progn
+         (add-hook 'after-init-hook 'global-company-mode))
+     )
    #+END_SRC
 
 ** Tags
@@ -458,6 +481,14 @@
          (setq ag-highlight-search t)
        )
      )
+   #+END_SRC
+
+** NeoTree
+   nerdtree like plugin
+
+   #+BEGIN_SRC emacs-lisp
+     (add-to-list 'load-path "/Users/error/src/neotree")
+     (require 'neotree)
    #+END_SRC
 
 * Behaviour
@@ -529,8 +560,8 @@
 
 ** Transparancy
    #+BEGIN_SRC emacs-lisp
-     (set-frame-parameter (selected-frame) 'alpha '(90 75))
-     (add-to-list 'default-frame-alist '(alpha 90 75))
+     (set-frame-parameter (selected-frame) 'alpha '(90 85))
+     (add-to-list 'default-frame-alist '(alpha 90 85))
    #+END_SRC
 
 ** gls
@@ -601,19 +632,19 @@
     #+END_SRC
 
 ** Javascript
-   #+BEGIN_SRC emacs-lisp
-     (req-package tern
        :require tern-auto-complete
-       :init
-       (progn
-         (add-hook 'js-mode-hook
-                   (lambda ()
-                     (tern-mode t))))
        :config
        (progn
          (tern-ac-setup)))
 
      (req-package tern-auto-complete)
+   #+BEGIN_SRC emacs-lisp
+     (req-package tern
+       :init
+       (progn
+         (add-hook 'js-mode-hook
+                   (lambda ()
+                     (tern-mode t)))))
    #+END_SRC
 
 ** Coffeescript
@@ -657,6 +688,10 @@
      )
    #+END_SRC
 
+** Markdown
+   #+BEGIN_SRC emacs-lisp
+     (req-package markdown-mode)
+   #+END_SRC
 * Annoyances
   Fixing a couple of gripes I have with Emacs.
 
