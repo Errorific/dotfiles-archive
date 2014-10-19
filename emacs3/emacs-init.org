@@ -195,12 +195,9 @@
 
     #+BEGIN_SRC emacs-lisp
       (req-package evil-matchit
-                   :require (evil tt-mode)
+                   :require (evil)
                    :init (global-evil-matchit-mode 1)
-                   :config (
-                     plist-put evilmi-plugins 'tt-mode '(
-                       (evilmi-simple-get-tag evilmi-simple-jump)
-                       (evilmi-html-get-tag evilmi-html-jump))))
+                   :config ())
     #+END_SRC
 
 *** =undo-tree=
@@ -277,18 +274,18 @@
 
 
 *** =smart-mode-line=
-    #+BEGIN_SRC emacs-lisp :tangle no
+    #+BEGIN_SRC emacs-lisp
       (req-package smart-mode-line
          :init (progn
-           (setq sml/shorten-directory t)
-           (setq sml/shorten-modes t)
-           (setq sml/theme 'respectful))
+           (setq sml/shorten-directory t
+                 sml/shorten-modes t
+                 sml/theme 'automatic))
          :config (progn
            (sml/setup)))
     #+END_SRC
 
 *** =powerline=
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle no
       (req-package powerline-evil
         :config (powerline-evil-center-color-theme))
     #+END_SRC
@@ -344,6 +341,16 @@
                   :diminish (server-buffer-clients . ""))
    #+END_SRC
 
+** FillColumnIndicator
+   #+BEGIN_SRC emacs-lisp
+     (req-package fill-column-indicator
+       :config (progn
+         (add-hook 'html-mode-hook 'fci-mode)
+         (add-hook 'cperl-mode-hook 'fci-mode)
+         (add-hook 'prog-mode-hook 'fci-mode))
+      )
+   #+END_SRC
+
 * IDE
   A few conveniences that I like to have in all my =prog-mode= buffers.
 
@@ -372,8 +379,6 @@
      (req-package linum
        :config (progn
          (add-hook 'html-mode-hook
-                   '(lambda () (linum-mode 1)))
-         (add-hook 'tt-mode-hook
                    '(lambda () (linum-mode 1)))
          (add-hook 'cperl-mode-hook
                    '(lambda () (linum-mode 1)))
@@ -487,8 +492,7 @@
    nerdtree like plugin
 
    #+BEGIN_SRC emacs-lisp
-     (add-to-list 'load-path "/Users/error/src/neotree")
-     (require 'neotree)
+     (req-package neotree)
    #+END_SRC
 
 * Behaviour
@@ -631,6 +635,13 @@
         :init (add-hook 'haskell-mode-hook (lambda () (ghc-init))))
     #+END_SRC
 
+** Purescript
+   #+BEGIN_SRC emacs-lisp
+     (add-to-list 'load-path "~/src/purescript-mode/")
+     (require 'purescript-mode-autoloads)
+     (add-hook 'purescript-mode-hook 'turn-on-purescript-indentation)
+
+   #+END_SRC
 ** Javascript
        :require tern-auto-complete
        :config
@@ -675,7 +686,6 @@
          (defalias 'perl-mode 'cperl-mode)
          (setq cperl-sub-regexp (regexp-opt cperl-sub-keywords))))
 
-     (req-package tt-mode)
    #+END_SRC
 
 ** YAML
@@ -691,6 +701,13 @@
 ** Markdown
    #+BEGIN_SRC emacs-lisp
      (req-package markdown-mode)
+   #+END_SRC
+
+** Web Mode
+   #+BEGIN_SRC emacs-lisp
+     (req-package web-mode
+       :init (add-to-list 'auto-mode-alist '("\\.tt\\'" . web-mode))
+     )
    #+END_SRC
 * Annoyances
   Fixing a couple of gripes I have with Emacs.

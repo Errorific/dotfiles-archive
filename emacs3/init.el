@@ -6,7 +6,7 @@
 ;; process. So your config org file should not be named "init.org".
 
 ;; Initialize cask to get the correct version of org-mode
-(require 'cask "/usr/local/Cellar/cask/0.7.1/cask.el")
+(require 'cask "/usr/local/Cellar/cask/0.7.2/cask.el")
 (cask-initialize)
 
 (require 'ob-tangle)
