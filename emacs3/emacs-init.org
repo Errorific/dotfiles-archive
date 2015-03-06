@@ -113,6 +113,7 @@
              magit-status-mode
              magit-stash-mode
              git-status-mode
+             haskell-interactive-mode
              grep-mode
              neotree-mode
              dired-mode)))
@@ -342,7 +343,7 @@
    #+END_SRC
 
 ** FillColumnIndicator
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle no
      (req-package fill-column-indicator
        :config (progn
          (add-hook 'html-mode-hook 'fci-mode)
@@ -587,7 +588,6 @@
        (add-to-list 'auto-mode-alist '("\\.lhs$" . literate-haskell-mode))
        :config
        (progn
-         (setq warning-suppress-types (append '(stylish-haskell) warning-suppress-types))
          (req-package inf-haskell)
          (req-package hs-lint)
          (bind-key "C-x C-d" nil haskell-mode-map)
@@ -605,9 +605,9 @@
            (capitalized-words-mode)
            (diminish 'capitalized-words-mode "")
            (turn-on-eldoc-mode)
+           (turn-on-haskell-indentation)
            (diminish 'eldoc-mode "")
            (turn-on-haskell-decl-scan)
-           (turn-on-haskell-indentation)
            (setq evil-auto-indent nil))
          (setq haskell-literate-default 'tex)
          (setq haskell-stylish-on-save t)
@@ -618,18 +618,25 @@
      (req-package flycheck-haskell
        :config (add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
    #+END_SRC
+
 *** Structured Haskell Mode
     Sometimes I think this is awesome, other times I think it is rage inducing.
     Currently we are in the rage inducing part of the cycle.
     #+BEGIN_SRC emacs-lisp :tangle no
       (req-package shm
-                   :require haskell-mode
-                   :commands structured-haskell-mode
-                   :init (add-hook 'haskell-mode-hook
-                                   'structured-haskell-mode))
+        :require haskell-mode
+        :commands structured-haskell-mode
+        :config
+          (add-hook 'haskell-mode-hook 'structured-haskell-mode)
+          (bind-key "C-c i" 'shm-reformat-decl haskell-mode-map)
+          (bind-key ")" 'shm/goto-parent-end haskell-mode-map)
+          (bind-key "(" 'shm/goto-parent haskell-mode-map)
+          (bind-key "C-c '" 'shm/add-operand haskell-mode-map)
+      )
     #+END_SRC
 
 *** ghc-mod
+
     #+BEGIN_SRC emacs-lisp :tangle no
       (req-package ghc
         :init (add-hook 'haskell-mode-hook (lambda () (ghc-init))))
@@ -658,9 +665,26 @@
                      (tern-mode t)))))
    #+END_SRC
 
+** JSX
+   #+BEGIN_SRC emacs-lisp
+     (req-package jsx-mode
+       :init
+       (add-to-list 'auto-mode-alist '("\\.jsx$" . jsx-mode))
+     )
+   #+END_SRC
+
 ** Coffeescript
    #+BEGIN_SRC emacs-lisp
-     (req-package coffee-mode)
+     (req-package coffee-mode
+       :init (add-to-list 'auto-mode-alist '("\\.cjsx" . coffee-mode))
+     )
+   #+END_SRC
+
+** Stylus
+   #+BEGIN_SRC emacs-lisp
+     (req-package stylus-mode
+       :init (add-to-list 'auto-mode-alist '("\\.styl" . stylus-mode))
+     )
    #+END_SRC
 
 ** Scala

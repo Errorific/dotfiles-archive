@@ -11,6 +11,7 @@ PATH=$HOME/.rvm/bin:$PATH # Add RVM to PATH for scripting
 [[ -s "$HOME/perl5/perlbrew/etc/bashrc" ]] && source ~/perl5/perlbrew/etc/bashrc
 [[ -d "$HOME/.npm-packages/bin" ]] && PATH=$HOME/.npm-packages/bin:$PATH
 [[ -d "$HOME/.cabal/bin" ]] && PATH=$HOME/.cabal/bin:$PATH
+[[ -d "$HOME/.cabin/bin" ]] && PATH=$HOME/.cabin/bin:$PATH
 
 # ENV
 if [[ "$OSTYPE" == darwin* ]]; then
@@ -39,10 +40,10 @@ fi
 
 
 # Antigen
-[[ ! -d ~/.dotfiles/antigen ]] &&
-        mkdir -p ~/.dotfiles && git clone https://github.com/zsh-users/antigen.git ~/.dotfiles/antigen
+[[ ! -d ~/.antigen/antigen ]] &&
+        mkdir -p ~/.antigen && git clone https://github.com/zsh-users/antigen.git ~/.antigen/antigen
 
-source ~/.dotfiles/antigen/antigen.zsh
+source ~/.antigen/antigen/antigen.zsh
 
 # Load the oh-my-zsh library
 antigen use oh-my-zsh
