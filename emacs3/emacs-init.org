@@ -643,7 +643,8 @@
     #+END_SRC
 
 ** Purescript
-   #+BEGIN_SRC emacs-lisp
+   Untangled this until I want purescript
+   #+BEGIN_SRC emacs-lisp :tangle no
      (add-to-list 'load-path "~/src/purescript-mode/")
      (require 'purescript-mode-autoloads)
      (add-hook 'purescript-mode-hook 'turn-on-purescript-indentation)
@@ -691,6 +692,9 @@
 
    #+BEGIN_SRC emacs-lisp
      (req-package scala-mode2)
+     (req-package ensime
+       :init (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+     )
    #+END_SRC
 
 ** Perl
@@ -731,6 +735,12 @@
    #+BEGIN_SRC emacs-lisp
      (req-package web-mode
        :init (add-to-list 'auto-mode-alist '("\\.tt\\'" . web-mode))
+     )
+   #+END_SRC
+** Swift
+   #+BEGIN_SRC emacs-lisp
+     (req-package swift-mode
+       :init (add-to-list 'flycheck-checkers 'swift)
      )
    #+END_SRC
 * Annoyances
