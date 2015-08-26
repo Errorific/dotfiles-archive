@@ -18,6 +18,8 @@
  '(global-company-mode t)
  '(js-indent-level 2)
  '(perl-indent-level 2)
+ '(truncate-lines nil)
+ '(truncate-partial-width-windows nil)
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
    (quote

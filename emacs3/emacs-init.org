@@ -67,6 +67,8 @@
 
    #+BEGIN_SRC emacs-lisp
      (require 'req-package)
+     (req-package diminish)
+     (req-package bind-key)
      (setq custom-file "~/.emacs.d/custom.el")
      (load custom-file)
    #+END_SRC
@@ -100,7 +102,7 @@
      (req-package evil
        :require (undo-tree ace-jump-mode)
        :ensure evil
-       :init
+       :config
        (progn
          (setq evil-default-cursor t)
          (evil-mode 1)
@@ -116,9 +118,7 @@
              haskell-interactive-mode
              grep-mode
              neotree-mode
-             dired-mode)))
-       :config
-       (progn
+             dired-mode))
          (bind-key "[escape]" 'keyboard-escape-quit evil-normal-state-map)
          (bind-key "[escape]" 'keyboard-escape-quit evil-visual-state-map)
          (bind-key "<escape>" 'keyboard-escape-quit)
@@ -136,7 +136,7 @@
       (req-package evil-leader
                    :require (evil evil-nerd-commenter)
                    :ensure evil-leader
-                   :init
+                   :config
                    (progn
                      (evil-leader/set-leader "<SPC>")
                      (global-evil-leader-mode 1)
@@ -188,7 +188,7 @@
     #+BEGIN_SRC emacs-lisp
       (req-package evil-surround
                    :require evil
-                   :init (global-evil-surround-mode 1))
+                   :config (global-evil-surround-mode 1))
     #+END_SRC
 *** =evil-matchit=
     Allows you to use % to jump between matched tags in html etc instead of
@@ -197,8 +197,8 @@
     #+BEGIN_SRC emacs-lisp
       (req-package evil-matchit
                    :require (evil)
-                   :init (global-evil-matchit-mode 1)
-                   :config ())
+                   :config (global-evil-matchit-mode 1)
+                   )
     #+END_SRC
 
 *** =undo-tree=
@@ -208,7 +208,7 @@
     #+BEGIN_SRC emacs-lisp
       (req-package undo-tree
                    :diminish ""
-                   :init
+                   :config
                    (progn
                      (setq undo-tree-auto-save-history t)
                      (global-undo-tree-mode)
@@ -234,7 +234,7 @@
 ** =projectile=
    #+BEGIN_SRC emacs-lisp
      (req-package projectile
-        :init (projectile-global-mode))
+        :config (projectile-global-mode))
    #+END_SRC
 
 * Org
@@ -262,7 +262,7 @@
    #+BEGIN_SRC emacs-lisp
      (req-package flx-ido
         :require flx
-        :init (progn
+        :config (progn
           (ido-mode 1)
           (ido-everywhere 1)
           (flx-ido-mode 1)))
@@ -277,11 +277,10 @@
 *** =smart-mode-line=
     #+BEGIN_SRC emacs-lisp
       (req-package smart-mode-line
-         :init (progn
+         :config (progn
            (setq sml/shorten-directory t
                  sml/shorten-modes t
-                 sml/theme 'automatic))
-         :config (progn
+                 sml/theme 'automatic)
            (sml/setup)))
     #+END_SRC
 
@@ -304,7 +303,7 @@
        (mapc #'disable-theme custom-enabled-themes))
 
      (req-package color-theme-sanityinc-tomorrow
-       :init (load-theme 'sanityinc-tomorrow-eighties :no-confirm))
+       :config (load-theme 'sanityinc-tomorrow-eighties :no-confirm))
    #+END_SRC
 
 ** Faces
@@ -343,9 +342,10 @@
    #+END_SRC
 
 ** FillColumnIndicator
-   #+BEGIN_SRC emacs-lisp :tangle no
+   #+BEGIN_SRC emacs-lisp
      (req-package fill-column-indicator
        :config (progn
+         (setq fci-rule-column 80)
          (add-hook 'html-mode-hook 'fci-mode)
          (add-hook 'cperl-mode-hook 'fci-mode)
          (add-hook 'prog-mode-hook 'fci-mode))
@@ -359,9 +359,9 @@
    Flycheck has helped me write more programs than I'm totally
    comfortable admitting.
 
+       :diminish (global-flycheck-mode . " ✓ "))
    #+BEGIN_SRC emacs-lisp
      (req-package flycheck
-       :diminish (global-flycheck-mode . " ✓ ")
        :config (progn
          (setq-default flycheck-disabled-checkers '(perl perl-perlcritic))
          (add-hook 'after-init-hook 'global-flycheck-mode)))
@@ -372,7 +372,9 @@
 
    #+BEGIN_SRC emacs-lisp
      (req-package magit
-       :diminish magit-auto-revert-mode)
+       :diminish magit-auto-revert-mode
+       :init (setq magit-last-seen-setup-instructions "1.4.0")
+     )
    #+END_SRC
 
 ** Line Numbers
@@ -400,7 +402,7 @@
 
     #+BEGIN_SRC emacs-lisp :tangle no
       (req-package linum-relative
-        :init (setq linum-relative-current-symbol ""))
+        :config (setq linum-relative-current-symbol ""))
     #+END_SRC
 
 ** Expand Region
@@ -419,7 +421,7 @@
      (req-package smartparens-config
        :ensure smartparens
        :diminish (smartparens-mode . "()")
-       :init (smartparens-global-mode t))
+       :config (smartparens-global-mode t))
 
      (req-package rainbow-delimiters
        :config
@@ -443,10 +445,9 @@
    #+BEGIN_SRC emacs-lisp
      (req-package color-identifiers-mode
        :diminish (color-identifiers-mode . "")
-       :init
-       (setq color-identifiers:num-colors 50)
        :config
        (progn
+         (setq color-identifiers:num-colors 50)
          (add-hook 'emacs-lisp-mode-hook 'color-identifiers-mode)
          (add-hook 'ruby-mode-hook 'color-identifiers-mode)))
    #+END_SRC
@@ -456,13 +457,11 @@
      (req-package auto-complete-config
        :require (ac-math)
        :ensure auto-complete
-       :init
-       (progn
-         (ac-config-default)
-         (setq ac-auto-start 3))
        :config
        (progn
-         (require 'ac-math)))
+         (ac-config-default)
+         (setq ac-auto-start 3)
+       ))
    #+END_SRC
 
    #+BEGIN_SRC emacs-lisp
@@ -538,6 +537,13 @@
      (add-hook 'before-save-hook 'whitespace-cleanup)
    #+END_SRC
 
+** Wrapping
+   Wrap at window edge
+
+   #+BEGIN_SRC emacs-lisp :tangle no
+     (setq default-truncate-lines f)
+   #+END_SRC
+
 * OSX
   Things that need changing on macs
 
@@ -583,11 +589,10 @@
      (req-package haskell-mode
        :require (flycheck flycheck-haskell)
        :commands haskell-mode
-       :init
-       (add-to-list 'auto-mode-alist '("\\.hs$" . haskell-mode))
-       (add-to-list 'auto-mode-alist '("\\.lhs$" . literate-haskell-mode))
        :config
        (progn
+         (add-to-list 'auto-mode-alist '("\\.hs$" . haskell-mode))
+         (add-to-list 'auto-mode-alist '("\\.lhs$" . literate-haskell-mode))
          (req-package inf-haskell)
          (req-package hs-lint)
          (bind-key "C-x C-d" nil haskell-mode-map)
@@ -639,7 +644,7 @@
 
     #+BEGIN_SRC emacs-lisp :tangle no
       (req-package ghc
-        :init (add-hook 'haskell-mode-hook (lambda () (ghc-init))))
+        :config (add-hook 'haskell-mode-hook (lambda () (ghc-init))))
     #+END_SRC
 
 ** Purescript
@@ -659,7 +664,7 @@
      (req-package tern-auto-complete)
    #+BEGIN_SRC emacs-lisp
      (req-package tern
-       :init
+       :config
        (progn
          (add-hook 'js-mode-hook
                    (lambda ()
@@ -669,7 +674,7 @@
 ** JSX
    #+BEGIN_SRC emacs-lisp
      (req-package jsx-mode
-       :init
+       :config
        (add-to-list 'auto-mode-alist '("\\.jsx$" . jsx-mode))
      )
    #+END_SRC
@@ -677,14 +682,14 @@
 ** Coffeescript
    #+BEGIN_SRC emacs-lisp
      (req-package coffee-mode
-       :init (add-to-list 'auto-mode-alist '("\\.cjsx" . coffee-mode))
+       :config (add-to-list 'auto-mode-alist '("\\.cjsx" . coffee-mode))
      )
    #+END_SRC
 
 ** Stylus
    #+BEGIN_SRC emacs-lisp
      (req-package stylus-mode
-       :init (add-to-list 'auto-mode-alist '("\\.styl" . stylus-mode))
+       :config (add-to-list 'auto-mode-alist '("\\.styl" . stylus-mode))
      )
    #+END_SRC
 
@@ -693,9 +698,20 @@
    #+BEGIN_SRC emacs-lisp
      (req-package scala-mode2)
      (req-package ensime
-       :init (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+       :config
+         (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+         ;; run on strategy of eager
+         (setq scala-indent:default-run-on-strategy 0)
+         (setq scala-indent:use-javadoc-style t)
      )
    #+END_SRC
+
+** Coq
+
+  #+BEGIN_SRC emacs-lisp :tangle no
+    (load-file "/usr/local/share/emacs/site-lisp/ProofGeneral/generic/proof-site.el")
+    (req-package company-coq)
+  #+END_SRC
 
 ** Perl
 
@@ -722,7 +738,7 @@
    #+BEGIN_SRC emacs-lisp
      (req-package yaml-mode
        :require (flycheck)
-       :init (add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode))
+       :config (add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode))
      )
    #+END_SRC
 
@@ -734,15 +750,20 @@
 ** Web Mode
    #+BEGIN_SRC emacs-lisp
      (req-package web-mode
-       :init (add-to-list 'auto-mode-alist '("\\.tt\\'" . web-mode))
+       :config (add-to-list 'auto-mode-alist '("\\.tt\\'" . web-mode))
      )
    #+END_SRC
 ** Swift
    #+BEGIN_SRC emacs-lisp
      (req-package swift-mode
-       :init (add-to-list 'flycheck-checkers 'swift)
+       :config (add-to-list 'flycheck-checkers 'swift)
      )
    #+END_SRC
+** Lua
+   #+BEGIN_SRC emacs-lisp
+     (req-package lua-mode)
+   #+END_SRC
+
 * Annoyances
   Fixing a couple of gripes I have with Emacs.
 
@@ -762,7 +783,7 @@
 
    #+BEGIN_SRC emacs-lisp
      (req-package exec-path-from-shell
-       :init
+       :config
        (when (memq window-system '(mac ns))
          (exec-path-from-shell-initialize)))
    #+END_SRC
@@ -773,7 +794,7 @@
 
    #+BEGIN_SRC emacs-lisp
      (req-package files
-       :init
+       :config
        (progn
          (setq backup-directory-alist
                `((".*" . ,temporary-file-directory)))
@@ -781,6 +802,14 @@
                `((".*" ,temporary-file-directory t)))))
    #+END_SRC
 
+** Interlock files
+   Interlock files are symlinks created adjacent to a file to prevent 2
+   instances of emacs from opening the same file. Can't configure where
+   these are created so they are just getting turned off
+
+   #+BEGIN_SRC emacs-lisp
+     (setq create-lockfiles nil)
+   #+END_SRC
 ** Questions
    Keep it short.
 
@@ -794,7 +823,7 @@
 
    #+BEGIN_SRC emacs-lisp
      (req-package cus-edit+
-       :init (customize-toggle-outside-change-updates))
+       :config (customize-toggle-outside-change-updates))
    #+END_SRC
 * Fulfill Requirements
   At long last we need only call the following function to send =req-package= on
