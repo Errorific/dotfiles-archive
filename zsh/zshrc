@@ -3,15 +3,17 @@ export UPDATE_ZSH_DAYS=1
 
 PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
-# RVM
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-PATH=$HOME/.rvm/bin:$PATH # Add RVM to PATH for scripting
-
 # setup perlbrew, npm, cabal
 [[ -s "$HOME/perl5/perlbrew/etc/bashrc" ]] && source ~/perl5/perlbrew/etc/bashrc
 [[ -d "$HOME/.npm-packages/bin" ]] && PATH=$HOME/.npm-packages/bin:$PATH
 [[ -d "$HOME/.cabal/bin" ]] && PATH=$HOME/.cabal/bin:$PATH
 [[ -d "$HOME/.cabin/bin" ]] && PATH=$HOME/.cabin/bin:$PATH
+[[ -d "$HOME/.nvm" ]] && export NVM_DIR=~/.nvm
+[[ -d "$HOME/.nvm" ]] && source $(brew --prefix nvm)/nvm.sh
+
+# RVM
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+# PATH=$HOME/.rvm/bin:$PATH # Add RVM to PATH for scripting
 
 # ENV
 if [[ "$OSTYPE" == darwin* ]]; then
@@ -55,22 +57,28 @@ antigen bundles <<EOBUNDLES
 
   git
   git-extras
+  gitignore
 
-  tmux
+  emacs
 
   colored-man
 
+  tmux
+  cabal
+  httpie
+  nvm
+  npm
   rvm
   fasd
   #z
 
   brew
+  brew-cask
+
 
   # Syntax Highlighting
   zsh-users/zsh-syntax-highlighting
 EOBUNDLES
-
-antigen bundle petervanderdoes/git-flow-completion
 
 # Load a theme
 #antigen theme sindresorhus/pure pure
@@ -86,3 +94,4 @@ alias gf='git flow'
 alias gcd='git checkout develop'
 alias gch='git checkout hotfix'
 alias gcr='git checkout release'
+alias fuck='eval $(thefuck $(fc -ln -1 | tail -n 1)); fc -R'
