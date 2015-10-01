@@ -49,7 +49,7 @@
    ;; the list `dotspacemacs-configuration-layers'
    dotspacemacs-delete-orphan-packages t))
 
-(defun dotspacemacs/init ()
+(defun dotspacemacs/user-init ()
   "Initialization function.
 This function is called at the very startup of Spacemacs initialization
 before layers configuration."
@@ -112,9 +112,9 @@ before layers configuration."
    ;; If non nil the paste micro-state is enabled. When enabled pressing `p`
    ;; several times cycle between the kill ring content.
    dotspacemacs-enable-paste-micro-state nil
-   ;; Guide-key delay in seconds. The Guide-key is the popup buffer listing
+   ;; Which-key delay in seconds. The which-key is the popup buffer listing
    ;; the commands bound to the current keystrokes.
-   dotspacemacs-guide-key-delay 0.4
+   dotspacemacs-which-key-delay 0.4
    ;; If non nil a progress bar is displayed when spacemacs is loading. This
    ;; may increase the boot time on some systems and emacs builds, set it to
    ;; nil ;; to boost the loading time.
@@ -161,15 +161,15 @@ before layers configuration."
   ;; User initialization goes here
   )
 
-(defun dotspacemacs/config ()
+(defun dotspacemacs/user-config ()
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
 
-  (setq-default
-   flycheck-scalastyle-jar "/usr/local/Cellar/scalastyle/0.7.0/libexec/scalastyle_2.11-0.7.0-batch.jar"
-   flycheck-scalastylerc "/usr/local/etc/scalastyle_config.xml"
-   )
+  ;; (setq-default
+   ;; flycheck-scalastyle-jar "/usr/local/Cellar/scalastyle/0.7.0/libexec/scalastyle_2.11-0.7.0-batch.jar"
+   ;; ;; flycheck-scalastylerc "/usr/local/etc/scalastyle_config.xml"
+  ;; )
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
