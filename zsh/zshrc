@@ -1,3 +1,4 @@
+zmodload zsh/zprof
 # AUTO-UPDATES
 export UPDATE_ZSH_DAYS=1
 
@@ -52,6 +53,7 @@ antigen use oh-my-zsh
 
 antigen bundles <<EOBUNDLES
 
+  common-aliases
   # Helper for extracting different archives
   extract
 
@@ -61,7 +63,7 @@ antigen bundles <<EOBUNDLES
 
   emacs
 
-  colored-man
+  colored-man-pages
 
   tmux
   cabal
