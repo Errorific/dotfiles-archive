@@ -17,25 +17,29 @@
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
+     ;; evil
+     evil-cleverparens
+     vim-empty-lines
+
      auto-completion
-     ;; better-defaults
      emacs-lisp
-     git 
+     git
      version-control
      markdown
      org
      osx
      shell
      syntax-checking
-     theme-megapack
+     themes-megapack
      ;; Langs
-     haskell :variables haskell-enable-ghci-ng-support t
+     (haskell :variables haskell-enable-shm-support t)
      html
      javascript
+     perl
      scala
+     yaml
      ;; Windows
      eyebrowse
-     games
      )
    ;; List of additional packages that will be installed wihout being
    ;; wrapped in a layer. If you need some configuration for these
@@ -166,11 +170,15 @@ before layers configuration."
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
 
+  (spacemacs/toggle-evil-cleverparens-on) 
   ;; (setq-default
    ;; flycheck-scalastyle-jar "/usr/local/Cellar/scalastyle/0.7.0/libexec/scalastyle_2.11-0.7.0-batch.jar"
    ;; ;; flycheck-scalastylerc "/usr/local/etc/scalastyle_config.xml"
   ;; )
-)
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
+  (setq web-mode-indent-style 2))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
