@@ -9,6 +9,7 @@ PATH=/usr/local/bin:/usr/local/sbin:$PATH
 [[ -d "$HOME/.npm-packages/bin" ]] && PATH=$HOME/.npm-packages/bin:$PATH
 [[ -d "$HOME/.cabal/bin" ]] && PATH=$HOME/.cabal/bin:$PATH
 [[ -d "$HOME/.cabin/bin" ]] && PATH=$HOME/.cabin/bin:$PATH
+[[ -d "$HOME/.local/bin" ]] && PATH=$HOME/.local/bin:$PATH
 [[ -d "$HOME/.nvm" ]] && export NVM_DIR=~/.nvm
 [[ -d "$HOME/.nvm" ]] && source $(brew --prefix nvm)/nvm.sh
 
@@ -70,7 +71,6 @@ antigen bundles <<EOBUNDLES
   httpie
   nvm
   npm
-  rvm
   fasd
   #z
 
