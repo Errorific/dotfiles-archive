@@ -33,16 +33,17 @@
   (use-package cperl-mode
     :init
     (progn
+      (load-file "~/.dotfiles/emacs-private/local/cperl-mode.el")
       (defalias 'perl-mode 'cperl-mode))
     :config
     (progn
       (add-to-list 'auto-mode-alist '("\\.tt\\'" . web-mode))
-      (setq cperl-indent-level 2
+      (setq cperl-indent-level 4
             cperl-indent-parens-as-block t
             cperl-indent-subs-specially nil
-            cperl-continued-statement-offset 2
+            cperl-continued-statement-offset 4
             cperl-continued-brace-offset 0
-            cperl-close-paren-offset -2
+            cperl-close-paren-offset -4
             cperl-tabs-always-indent nil
             cperl-sub-keywords '("sub" "method" "func"))
       (setq cperl-sub-regexp (regexp-opt cperl-sub-keywords)))))
