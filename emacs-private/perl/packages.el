@@ -33,7 +33,7 @@
   (use-package cperl-mode
     :init
     (progn
-      (load-file "~/.dotfiles/emacs-private/local/cperl-mode.el")
+      (load-file "~/.emacs.d/private/perl/cperl-mode.el")
       (defalias 'perl-mode 'cperl-mode))
     :config
     (progn
