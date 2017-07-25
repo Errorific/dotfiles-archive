@@ -37,7 +37,7 @@
 ;; The latest version is available from
 ;; http://github.com/jrockway/cperl-mode
 ;;
-;; (perhaps in the moosex-declare branch)
+;; (perhaps in the mx-declare branch)
 
 ;; You can either fine-tune the bells and whistles of this mode or
 ;; bulk enable them by putting
@@ -1453,7 +1453,7 @@ the last)."
 ;;; Tired of editing this in 8 places every time I remember that there
 ;;; is another method-defining keyword
 (defvar cperl-sub-keywords
-  '("sub"))
+  '("sub" "multi method" "method" "before" "after" "around" "override" "augment"))
 
 (defvar cperl-sub-regexp (regexp-opt cperl-sub-keywords))
 
@@ -3331,6 +3331,67 @@ Returns true if comment is found.  In POD will not move the point."
 	(put-text-property bb e 'face (if string 'font-lock-string-face
 					'font-lock-comment-face)))))
 
+(defun cperl-fontify-method-signature (bb e)
+  "Fontifiy subroutine/method prototype.
+
+BB is the starting position of the signature, including the (, E
+is the end of the signature, including the final ).
+
+This method can parse and highlight traditional prototypes (&@)
+as well as (many) MooseX::Method::Signatures method signatures.
+
+There are a few limitations; this method will not be called by
+the syntax scanner if the method signature is not on a single
+line, or if the signature contains extra parens.  So declare your
+types and coercions in advance, with MooseX::Types."
+
+  (save-excursion
+    (goto-char bb)
+    (save-match-data
+      (when (looking-at "(.*)")
+        (save-restriction
+          (narrow-to-region (1+ (match-beginning 0)) (1- (match-end 0)))
+          (goto-char (1+ (match-beginning 0)))
+          (remove-text-properties (point) (point-max) '(font-lock-face))
+
+          ;; traditional prototype (not signature)
+          (when (looking-at "^[\\_$@*;&]+$")
+            (put-text-property (match-beginning 0) (match-end 0)
+                               'font-lock-face 'font-lock-builtin-face)
+
+            (put-text-property (match-beginning 0) (match-end 0)
+                               'syntax-table cperl-string-syntax-table)
+
+            (goto-char (match-end 0)))
+
+          ;; MX::Method::Signatures signature
+          (while (looking-at (concat
+              ;; type name
+              "[[:space:]]*\\(?:\\([A-Za-z:_|]+\\)[[:space:]]+\\)?"
+              ;; variable name (named) (required/optional)
+              "[:]?\\([$@%*;][A-Za-z:_]+\\)[!?]?[[:space:]]*"
+              "\\(\\(?:[[:space:]]*\\(?:"
+              "\\(?:does\\|is\\) +[A-Za-z:_]+\\|"
+              "where *{[^}]*}\\|"
+              " *= *[A-Za-z:_0-9]+"
+              "\\)\\)*\\)[[:space:]]*"
+              ;; end with invocant separator, comma, or end of string
+              "\\([,:]\\|$\\)"))
+            (when (match-string 1)
+              (put-text-property (match-beginning 1) (match-end 1)
+                                 'font-lock-face 'font-lock-type-face))
+            (put-text-property (match-beginning 2) (match-end 2)
+                               'font-lock-face 'font-lock-variable-name-face)
+            (when (match-string 3)
+              (put-text-property (match-beginning 3) (match-end 3)
+                                 'font-lock-face 'font-lock-keyword-face))
+            ;; This doesn't work right, it kills the other faces :(
+            ;; (if (equal (match-string 4) ":")
+            ;;     (put-text-property (match-beginning 0) (match-end 0)
+            ;;                        'font-lock-face '(:underline t)))
+            (goto-char (match-end 0)))))))
+  t)
+
 (defvar cperl-starters '(( ?\( . ?\) )
 			 ( ?\[ . ?\] )
 			 ( ?\{ . ?\} )
@@ -4700,8 +4761,8 @@ the sections using `cperl-pod-head-face', `cperl-pod-face',
 		  (goto-char b)
 		  (if (eq (char-after (match-beginning 17)) ?\( )
 		      (progn
-			(cperl-commentify ; Prototypes; mark as string
-			 (match-beginning 17) (match-end 17) t)
+                        (cperl-fontify-method-signature
+                         (match-beginning 17) (match-end 17))
 			(goto-char (match-end 0))
 			;; Now look for attributes after prototype:
 			(forward-comment (buffer-size))
@@ -5654,7 +5715,7 @@ indentation and initial hashes.  Behaves usually outside of comment."
 			"Face for things which should stand out"))
   ;;(setq font-lock-constant-face 'font-lock-constant-face)
   )
-
+; (cperl-init-faces)
 (defun cperl-init-faces ()
   (condition-case errs
       (progn
@@ -5682,6 +5743,7 @@ indentation and initial hashes.  Behaves usually outside of comment."
                  "try" "catch" "finally"
 		 "foreach" "continue" "exit" "die" "last" "goto" "next"
 		 "redo" "return" "local" "exec"
+                 "class" "role" "with" "extends"
                  "do" "dump"
                  "use" "our"
 		 "require" "package" "eval" "evalbytes" "my" "state"
@@ -5767,18 +5829,18 @@ indentation and initial hashes.  Behaves usually outside of comment."
 	      ;; "AUTOLOAD" "BEGIN" "CHECK" "DESTROY" "END" "INIT" "UNITCHECK" "__END__" "chomp"
 	      ;; "break" "chop" "default" "defined" "delete" "do" "each" "else" "elsif"
 	      ;; "eval" "evalbytes" "exists" "for" "foreach" "format" "given" "goto"
-	      ;; "grep" "if" "keys" "last" "local" "map" "my" "next"
+	      ;; "grep" "has" "if" "keys" "last" "local" "map" "my" "next"
 	      ;; "no" "our" "package" "pop" "pos" "print" "printf" "prototype" "push"
-	      ;; "q" "qq" "qw" "qx" "redo" "return" "say" "scalar" "shift"
+	      ;; "q" "qq" "qw" "qx" "redo" "return" "requires" "say" "scalar" "shift"
 	      ;; "sort" "splice" "split" "state" "study" "sub" "tie" "tr"
 	      ;; "undef" "unless" "unshift" "untie" "until" "use"
 	      ;; "when" "while" "y"
 	      "AUTOLOAD\\|BEGIN\\|\\(UNIT\\)?CHECK\\|break\\|c\\(atch\\|ho\\(p\\|mp\\)\\)\\|d\\(e\\(f\\(inally\\|ault\\|ined\\)\\|lete\\)\\|"
 	      "o\\)\\|DESTROY\\|e\\(ach\\|val\\(bytes\\)?\\|xists\\|ls\\(e\\|if\\)\\)\\|"
-	      "END\\|for\\(\\|each\\|mat\\)\\|g\\(iven\\|rep\\|oto\\)\\|INIT\\|if\\|keys\\|"
+	      "END\\|for\\(\\|each\\|mat\\)\\|g\\(iven\\|rep\\|oto\\)\\|INIT\\|has\\|if\\|keys\\|"
 	      "l\\(ast\\|ocal\\)\\|m\\(ap\\|y\\)\\|n\\(ext\\|o\\)\\|our\\|"
 	      "p\\(ackage\\|rototype\\|rint\\(\\|f\\)\\|ush\\|o\\(p\\|s\\)\\)\\|"
-	      "q\\(\\|q\\|w\\|x\\|r\\)\\|re\\(turn\\|do\\)\\|s\\(ay\\|pli\\(ce\\|t\\)\\|"
+	      "q\\(\\|q\\|w\\|x\\|r\\)\\|re\\(turn\\|do\\|quires\\)\\|s\\(ay\\|pli\\(ce\\|t\\)\\|"
 	      "calar\\|t\\(ate\\|udy\\)\\|ub\\|hift\\|ort\\)\\|t\\(ry?\\|ied?\\)\\|"
 	      "u\\(se\\|n\\(shift\\|ti\\(l\\|e\\)\\|def\\|less\\)\\)\\|"
 	      "wh\\(en\\|ile\\)\\|y\\|__\\(END\\|DATA\\)__" ;__DATA__ added manually
@@ -5815,8 +5877,19 @@ indentation and initial hashes.  Behaves usually outside of comment."
 			 (if (eq (char-after (cperl-1- (match-end 0))) ?\{ )
 			     'font-lock-function-name-face
 			   'font-lock-variable-name-face))))
-	    '("\\<\\(package\\|require\\|use\\|import\\|no\\|bootstrap\\)[ \t]+\\([a-zA-z_][a-zA-z_0-9:]*\\)[ \t;]" ; require A if B;
+            ;; XXX: i think this is redundant for the sub-alikes, but
+            ;; it will fix a corner case where the prototype has
+            ;; nested parens in it.
+	    '("\\<\\(package\\|require\\|use\\|import\\|no\\|bootstrap\\|class\\|role\\|\\(?:multi \\)?method\\|before\\|after\\|around\\|override\\|augment\\)[ \t]+\\(?:#.+\n\\|[ \t]*\n\\)?[ \t]*\\([a-zA-z_][a-zA-z_0-9:]*\\)\\([ \t;]\\|$\\)" ; require A if B;
 	      2 font-lock-function-name-face)
+            '("\\<\\(?:with\\|extends\\)[ \t]\\([a-zA-z_][a-zA-z_0-9:]*\\)"
+              1 font-lock-function-name-face)
+
+            '("\\<\\(?:with\\|extends\\)[ \t]?("
+              (cperl-next-with-or-extends
+               nil nil
+               (1 font-lock-function-name-face t)))
+
 	    '("^[ \t]*format[ \t]+\\([a-zA-z_][a-zA-z_0-9:]*\\)[ \t]*=[ \t]*$"
 	      1 font-lock-function-name-face)
 	    (cond ((featurep 'font-lock-extra)
@@ -6197,6 +6270,16 @@ indentation and initial hashes.  Behaves usually outside of comment."
 	(setq cperl-faces-init t))
     (error (message "cperl-init-faces (ignored): %s" errs))))
 
+(defun cperl-next-with-or-extends (end)
+  "Find the module names after with or extends.
+
+END is the bound passed by the font-lock machinery."
+  (let ((bound
+         (or (save-match-data
+               (save-excursion ;; don't search past the closing paren
+                 (re-search-forward ")" (line-end-position) t)))
+             (line-end-position))))
+    (re-search-forward "\\([a-zA-Z0-9_:]+\\)[, \t ]*" bound t)))
 
 (defun cperl-ps-print-init ()
   "Initialization of `ps-print' components for faces used in CPerl."
