@@ -1,99 +1,108 @@
-zmodload zsh/zprof
-# AUTO-UPDATES
-export UPDATE_ZSH_DAYS=1
+# setting nvm to lazy load
+export NVM_LAZY_LOAD=true
 
-PATH=/usr/local/bin:/usr/local/sbin:$PATH
+# # Uncomment following line if you want red dots to be displayed while waiting for completion
+# export COMPLETION_WAITING_DOTS="true"
 
-# setup perlbrew, npm, cabal
-[[ -s "$HOME/perl5/perlbrew/etc/bashrc" ]] && source ~/perl5/perlbrew/etc/bashrc
-[[ -d "$HOME/.npm-packages/bin" ]] && PATH=$HOME/.npm-packages/bin:$PATH
-[[ -d "$HOME/.cabal/bin" ]] && PATH=$HOME/.cabal/bin:$PATH
-[[ -d "$HOME/.cabin/bin" ]] && PATH=$HOME/.cabin/bin:$PATH
-[[ -d "$HOME/.local/bin" ]] && PATH=$HOME/.local/bin:$PATH
-[[ -d "$HOME/.nvm" ]] && export NVM_DIR=~/.nvm
-[[ -d "$HOME/.nvm" ]] && source $(brew --prefix nvm)/nvm.sh
+# # Correct spelling for commands
+# setopt correct
 
-# RVM
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-# PATH=$HOME/.rvm/bin:$PATH # Add RVM to PATH for scripting
+# # turn off the infernal correctall for filenames
+# unsetopt correctall
 
-# ENV
-if [[ "$OSTYPE" == darwin* ]]; then
-  export BROWSER='open'
+# install zplug
+if [[ ! -d ~/.zplug ]];then
+    git clone https://github.com/b4b4r07/zplug ~/.zplug
 fi
-export EDITOR='vim'
-export VISUAL='vim'
-export PAGER='less'
-if [[ -z "$LANG" ]]; then
-  export LANG='en_AU.UTF-8'
+source ~/.zplug/init.zsh
+
+
+# Async for zsh, used by pure
+zplug "mafredri/zsh-async", from:github, defer:0
+
+# allows for lazy loading of nvm
+zplug "lukechilds/zsh-nvm", from:github
+
+# reminds you of alias's that are set for commands that you run
+zplug "djui/alias-tips", from:github
+zplug "chrissicool/zsh-256color", from:github
+
+zplug "lib/completion", from:oh-my-zsh
+zplug "lib/key-bindings", from:oh-my-zsh
+zplug "lib/history", from:oh-my-zsh
+zplug "lib/diretories", from:oh-my-zsh
+zplug "lib/termsupport", from:oh-my-zsh
+
+zplug "plugins/git", from:oh-my-zsh
+zplug "plugins/git-extras", from:oh-my-zsh
+zplug "plugins/tmux", from:oh-my-zsh
+zplug "plugins/ssh-agent", from:oh-my-zsh
+zplug "plugins/cpanm", from:oh-my-zsh
+zplug "plugins/colored-man-pages", from:oh-my-zsh
+# bunch of command aliases
+zplug "plugins/common-aliases", from:oh-my-zsh
+zplug "plugins/extract", from:oh-my-zsh
+
+if [ $(uname -a | grep -ci Darwin) = 1 ]; then
+    # Load OSX-specific plugins
+    zplug "plugins/brew", from:oh-my-zsh
+    zplug "plugins/osx", from:oh-my-zsh
 fi
 
-#
-# Less
-#
 
-# Set the default Less options.
-# Mouse-wheel scrolling has been disabled by -X (disable screen clearing).
-# Remove -X and -F (exit if the content fits on one screen) to enable it.
-export LESS='-F -g -i -M -R -S -w -z-4'
+# Syntax highlighting for commands
+zplug "zsh-users/zsh-syntax-highlighting", from:github, defer:2
 
-# Set the Less input preprocessor.
-if (( $+commands[lesspipe.sh] )); then
-  export LESSOPEN='| /usr/bin/env lesspipe.sh %s 2>&-'
+# Community assembled completions
+zplug "zsh-users/zsh-completions", from:github, use:src
+
+# fast/unobtrusive autosuggestions for zsh
+zplug "zsh-users/zsh-autosuggestions", from:github
+
+# git aware ls clone
+zplug "rimraf/k", from:github
+
+# History substring searching
+zplug "zsh-users/zsh-history-substring-search", from:github, defer:3
+
+# Theme!
+# zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
+zplug "intelfx/pure", use:pure.zsh, from:github, as:theme
+
+# Actually install plugins, prompt user input
+if ! zplug check --verbose; then
+    printf "Install zplug plugins? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
 fi
 
+zplug load
 
-# Antigen
-[[ ! -d ~/.antigen/antigen ]] &&
-        mkdir -p ~/.antigen && git clone https://github.com/zsh-users/antigen.git ~/.antigen/antigen
+zstyle :omz:plugins:ssh-agent agent-forwarding on
 
-source ~/.antigen/antigen/antigen.zsh
+# Set keystrokes for substring searching
+zmodload zsh/terminfo
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
 
-# Load the oh-my-zsh library
-antigen use oh-my-zsh
+setopt auto_cd
+setopt multios
+setopt prompt_subst
 
-antigen bundles <<EOBUNDLES
-
-  common-aliases
-  # Helper for extracting different archives
-  extract
-
-  git
-  git-extras
-  gitignore
-
-  emacs
-
-  colored-man-pages
-
-  tmux
-  cabal
-  httpie
-  nvm
-  npm
-  fasd
-  #z
-
-  brew
-  brew-cask
-
-
-  # Syntax Highlighting
-  zsh-users/zsh-syntax-highlighting
-EOBUNDLES
-
-# Load a theme
-#antigen theme sindresorhus/pure pure
-antigen bundle sindresorhus/pure
-
-# antigen bundle vi-mode
-
-# Tell antigen to execute
-antigen apply
-
-#Alias
-alias gf='git flow'
-alias gcd='git checkout develop'
-alias gch='git checkout hotfix'
-alias gcr='git checkout release'
+alias tsa='tmux new-session -t'
 alias fuck='eval $(thefuck $(fc -ln -1 | tail -n 1)); fc -R'
+
+
+# Yes, these are a pain to customize. Fortunately, Geoff Greer made an online
+# tool that makes it easy to customize your color scheme and keep them in sync
+# across Linux and OS X/*BSD at http://geoff.greer.fm/lscolors/
+export CLICOLOR=1
+export LSCOLORS='Exfxcxdxbxegedabagacad'
+export LS_COLORS='di=1;34;40:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:'
+
+[[ -n "$WINDOW" ]] && SCREEN_NO="%B$WINDOW%b " || SCREEN_NO=""
+
+
+[[ -s "$HOME/perl5/perlbrew/etc/bashrc" ]] && source ~/perl5/perlbrew/etc/bashrc
+source ~/perl5/perlbrew/etc/bashrc
