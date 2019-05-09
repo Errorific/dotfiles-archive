@@ -16,6 +16,7 @@ if [[ ! -d ~/.zplug ]];then
 fi
 source ~/.zplug/init.zsh
 
+alias git=hub
 
 # Async for zsh, used by pure
 zplug "mafredri/zsh-async", from:github, defer:0
@@ -37,11 +38,13 @@ zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/git-extras", from:oh-my-zsh
 zplug "plugins/tmux", from:oh-my-zsh
 zplug "plugins/ssh-agent", from:oh-my-zsh
+zplug "plugins/gpg-agent", from:oh-my-zsh
 zplug "plugins/cpanm", from:oh-my-zsh
 zplug "plugins/colored-man-pages", from:oh-my-zsh
 # bunch of command aliases
 zplug "plugins/common-aliases", from:oh-my-zsh
 zplug "plugins/extract", from:oh-my-zsh
+zplug "plugins/mosh", from:oh-my-zsh
 
 if [ $(uname -a | grep -ci Darwin) = 1 ]; then
     # Load OSX-specific plugins
@@ -91,8 +94,19 @@ setopt multios
 setopt prompt_subst
 
 alias tsa='tmux new-session -t'
-alias fuck='eval $(thefuck $(fc -ln -1 | tail -n 1)); fc -R'
+# alias fuck='eval $(thefuck $(fc -ln -1 | tail -n 1)); fc -R'
+eval $(thefuck --alias)
 
+# MOSH with SSH fallback.
+mosh() {
+   if command -v mosh &>/dev/null; then
+       command mosh "$@"
+       [[ $? -ne 0 ]] && (echo "MOSH failed on remote system. Retrying with SSH." ; command ssh "$@")
+   else
+       echo "MOSH not found on local system. Retrying with SSH."
+       command ssh "$@"
+   fi
+}
 
 # Yes, these are a pain to customize. Fortunately, Geoff Greer made an online
 # tool that makes it easy to customize your color scheme and keep them in sync
@@ -115,3 +129,5 @@ if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
   . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
 fi
 # End Nix
+
+[[ $(type jenv) ]] && eval "$(jenv init -)"
