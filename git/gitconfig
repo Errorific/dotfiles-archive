@@ -1,0 +1,8 @@
+[user]
+	name = Chris Mckay
+	email = chris@error.cm
+	signingkey = DCCCB396E0067153
+[core]
+	excludesfile = /Users/chris/.gitignore_global
+[commit]
+	gpgsign = true
