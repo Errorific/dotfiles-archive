@@ -93,7 +93,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(cperl-mode editorconfig groovy-mode (lsp-haskell :location (recipe :fetcher github :repo "emacs/lsp-haskell")))
+   dotspacemacs-additional-packages '(cperl-mode editorconfig groovy-mode (lsp-haskell :location (recipe :fetcher github :repo "emacs-lsp/lsp-haskell")))
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages and/or extensions that will not be install and loaded.
