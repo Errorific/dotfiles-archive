@@ -1,5 +1,5 @@
 # setting nvm to lazy load
-export NVM_LAZY_LOAD=true
+export NVM_LAZY_LOAD=false
 
 # # Uncomment following line if you want red dots to be displayed while waiting for completion
 # export COMPLETION_WAITING_DOTS="true"
@@ -19,7 +19,7 @@ source ~/.zplug/init.zsh
 alias git=hub
 
 # Async for zsh, used by pure
-zplug "mafredri/zsh-async", from:github, defer:0
+# zplug "mafredri/zsh-async", from:github, defer:0
 
 # allows for lazy loading of nvm
 zplug "lukechilds/zsh-nvm", from:github
@@ -70,7 +70,9 @@ zplug "zsh-users/zsh-history-substring-search", from:github, defer:3
 
 # Theme!
 # zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
+zplug "intelfx/pure", use:async.zsh, from:github
 zplug "intelfx/pure", use:pure.zsh, from:github, as:theme
+# zplug "BrandonRoehl/zsh-clean", as:theme, from:github
 
 # Actually install plugins, prompt user input
 if ! zplug check --verbose; then
@@ -125,9 +127,11 @@ GOPATH=/Users/chris/go
 [[ -s "$HOME/.rvm/bin" ]] && PATH="$PATH:$HOME/.rvm/bin"
 
 # Nix
-if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
-  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+if [ -e '/Users/chris/.nix-profile/etc/profile.d/nix.sh' ]; then
+  . '/Users/chris/.nix-profile/etc/profile.d/nix.sh'
 fi
 # End Nix
 
 [[ $(type jenv) ]] && eval "$(jenv init -)"
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
